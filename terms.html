@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <title>Terms & Conditions — Felicek</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        /* ── Reset & Base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-page: #e9e6df;
+            --surface: #f7f5f0;
+            --surface-white: #ffffff;
+            --text-primary: #1b2430;
+            --text-secondary: #5b6472;
+            --text-muted: #8a92a0;
+            --brand-teal: #0d9488;
+            --brand-teal-dark: #0a5f58;
+            --brand-teal-light: #eaf6f4;
+            --brand-navy: #1c2534;
+            --brand-purple: #8659c9;
+            --brand-purple-light: #f1eafb;
+            --brand-blue: #2f5fa8;
+            --border-subtle: rgba(27, 36, 48, 0.08);
+            --radius-card: 16px;
+            --radius-btn: 8px;
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+            --font-serif: 'Newsreader', Georgia, serif;
+            --transition: 0.25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            padding: 40px 20px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        a {
+            color: var(--brand-teal-dark);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--brand-teal);
+        }
+
+        /* ─── Container ─── */
+        .legal-container {
+            max-width: 820px;
+            margin: 0 auto;
+            background: var(--surface-white);
+            border-radius: var(--radius-card);
+            padding: 48px 56px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+        }
+
+        /* ─── Header ─── */
+        .legal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .legal-header .logo {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legal-header .logo .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--brand-teal);
+            display: inline-block;
+        }
+
+        .legal-header .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: var(--radius-btn);
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition);
+        }
+
+        .legal-header .back-link:hover {
+            border-color: var(--brand-teal);
+            color: var(--brand-teal);
+            background: var(--brand-teal-light);
+        }
+
+        /* ─── Title ─── */
+        .legal-title {
+            margin: 20px 0 8px;
+        }
+
+        .legal-title h1 {
+            font-family: var(--font-serif);
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .legal-title .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .legal-title .meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legal-title .meta i {
+            font-size: 14px;
+            color: var(--brand-teal);
+        }
+
+        /* ─── Table of Contents ─── */
+        .toc {
+            background: var(--bg-page);
+            border-radius: var(--radius-card);
+            padding: 20px 24px;
+            margin: 24px 0 32px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .toc h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px 24px;
+        }
+
+        .toc-grid a {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .toc-grid a:hover {
+            color: var(--brand-teal);
+        }
+
+        .toc-grid a i {
+            font-size: 10px;
+            color: var(--brand-teal);
+            opacity: 0.6;
+        }
+
+        /* ─── Content ─── */
+        .legal-content h2 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 700;
+            margin: 32px 0 12px;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .legal-content h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .legal-content h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 20px 0 8px;
+            color: var(--text-primary);
+        }
+
+        .legal-content p {
+            margin-bottom: 14px;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .legal-content ul,
+        .legal-content ol {
+            margin: 10px 0 18px 24px;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .legal-content ul li,
+        .legal-content ol li {
+            margin-bottom: 6px;
+        }
+
+        .legal-content ul li::marker {
+            color: var(--brand-teal);
+        }
+
+        .legal-content .highlight-box {
+            background: var(--brand-teal-light);
+            border-left: 4px solid var(--brand-teal);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 16px 0 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .legal-content .highlight-box strong {
+            color: var(--text-primary);
+        }
+
+        .legal-content .highlight-box i {
+            color: var(--brand-teal);
+            margin-right: 6px;
+        }
+
+        .legal-content .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0 20px;
+        }
+
+        .legal-content table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .legal-content table th {
+            background: var(--bg-page);
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .legal-content table td {
+            padding: 10px 14px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .legal-content table tr:hover td {
+            background: rgba(13, 148, 136, 0.02);
+        }
+
+        /* ─── Footer ─── */
+        .legal-footer {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .legal-footer .social {
+            display: flex;
+            gap: 14px;
+        }
+
+        .legal-footer .social a {
+            color: var(--text-muted);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .legal-footer .social a:hover {
+            color: var(--brand-teal);
+        }
+
+        /* ─── Back to top ─── */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--brand-navy);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(28, 37, 52, 0.15);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .back-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-top:hover {
+            background: #2a3648;
+            transform: translateY(-3px);
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .legal-container {
+                padding: 28px 20px;
+                border-radius: 12px;
+            }
+
+            .legal-title h1 {
+                font-size: 26px;
+            }
+
+            .legal-header .logo {
+                font-size: 18px;
+            }
+
+            .legal-header .back-link {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+
+            .legal-content h2 {
+                font-size: 20px;
+            }
+
+            .legal-content h3 {
+                font-size: 15px;
+            }
+
+            .legal-content p,
+            .legal-content ul,
+            .legal-content ol {
+                font-size: 14px;
+            }
+
+            .legal-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .back-top {
+                bottom: 16px;
+                right: 16px;
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+            }
+
+            .legal-content .table-wrap {
+                font-size: 12px;
+            }
+
+            .legal-content table th,
+            .legal-content table td {
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .legal-container {
+                padding: 20px 14px;
+            }
+
+            .legal-title h1 {
+                font-size: 22px;
+            }
+
+            .legal-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .legal-header .back-link {
+                align-self: flex-start;
+            }
+        }
+
+        /* ─── Print styles ─── */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .legal-container {
+                box-shadow: none;
+                border: none;
+                padding: 40px;
+                border-radius: 0;
+            }
+
+            .back-top {
+                display: none !important;
+            }
+
+            .legal-header .back-link {
+                display: none;
+            }
+
+            .toc {
+                break-inside: avoid;
+                background: #f5f5f5;
+            }
+
+            .legal-content h2 {
+                break-before: auto;
+            }
+
+            .legal-footer .social {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── BACK TO TOP BUTTON ─── -->
+    <button class="back-top" id="backTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ─── MAIN CONTENT ─── -->
+    <div class="legal-container">
+
+        <!-- ─── HEADER ─── -->
+        <div class="legal-header">
+            <a href="index.html" class="logo">
+                <span>Felicek</span>
+                <span class="dot"></span>
+            </a>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+
+        <!-- ─── TITLE ─── -->
+        <div class="legal-title">
+            <h1>Terms &amp; Conditions</h1>
+            <div class="meta">
+                <span><i class="fas fa-calendar-alt"></i> Effective: July 27, 2026</span>
+                <span><i class="fas fa-file-alt"></i> Version 2.1.0</span>
+                <span><i class="fas fa-clock"></i> Last reviewed: July 2026</span>
+            </div>
+        </div>
+
+        <!-- ─── TABLE OF CONTENTS ─── -->
+        <div class="toc">
+            <h3><i class="fas fa-list-ul"></i> Table of Contents</h3>
+            <div class="toc-grid">
+                <a href="#sec-1"><i class="fas fa-chevron-right"></i> 1. Introduction</a>
+                <a href="#sec-2"><i class="fas fa-chevron-right"></i> 2. Definitions</a>
+                <a href="#sec-3"><i class="fas fa-chevron-right"></i> 3. Account Types &amp; Eligibility</a>
+                <a href="#sec-4"><i class="fas fa-chevron-right"></i> 4. KYC &amp; Identity Verification</a>
+                <a href="#sec-5"><i class="fas fa-chevron-right"></i> 5. Trust Deposit &amp; Escrow</a>
+                <a href="#sec-6"><i class="fas fa-chevron-right"></i> 6. Job Listings &amp; Proposals</a>
+                <a href="#sec-7"><i class="fas fa-chevron-right"></i> 7. Skill Challenges</a>
+                <a href="#sec-8"><i class="fas fa-chevron-right"></i> 8. Payments &amp; Fees</a>
+                <a href="#sec-9"><i class="fas fa-chevron-right"></i> 9. Dispute Resolution</a>
+                <a href="#sec-10"><i class="fas fa-chevron-right"></i> 10. Termination &amp; Suspension</a>
+                <a href="#sec-11"><i class="fas fa-chevron-right"></i> 11. Data Privacy</a>
+                <a href="#sec-12"><i class="fas fa-chevron-right"></i> 12. User Conduct</a>
+                <a href="#sec-13"><i class="fas fa-chevron-right"></i> 13. Intellectual Property</a>
+                <a href="#sec-14"><i class="fas fa-chevron-right"></i> 14. Limitation of Liability</a>
+                <a href="#sec-15"><i class="fas fa-chevron-right"></i> 15. Indemnification</a>
+                <a href="#sec-16"><i class="fas fa-chevron-right"></i> 16. Governing Law</a>
+                <a href="#sec-17"><i class="fas fa-chevron-right"></i> 17. Changes to Terms</a>
+                <a href="#sec-18"><i class="fas fa-chevron-right"></i> 18. Contact Us</a>
+            </div>
+        </div>
+
+        <!-- ─── CONTENT ─── -->
+        <div class="legal-content">
+
+            <!-- Section 1 -->
+            <h2 id="sec-1">1. Introduction</h2>
+            <p>Welcome to Felicek ("Platform", "we", "our", "us"). These Terms &amp; Conditions ("Terms") govern your access to and use of the Felicek platform, including the website, mobile applications, and all related services (collectively, the "Services").</p>
+            <p>By creating an account, accessing, or using our Services, you agree to be bound by these Terms. If you do not agree to these Terms, you must not use our Services. These Terms form a legally binding agreement between you and Felicek.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-gavel"></i>
+                <strong>Please read these Terms carefully.</strong> They contain important information about your rights and obligations, including limitations on our liability and the resolution of disputes.
+            </div>
+
+            <!-- Section 2 -->
+            <h2 id="sec-2">2. Definitions</h2>
+            <p>For the purposes of these Terms, the following definitions apply:</p>
+            <ul>
+                <li><strong>"User"</strong> means any individual or entity that registers for or uses the Platform.</li>
+                <li><strong>"Freelancer"</strong> means a User who offers services through the Platform.</li>
+                <li><strong>"Client"</strong> means a User who posts jobs and hires Freelancers through the Platform.</li>
+                <li><strong>"Agency"</strong> means a User that operates as a multi-person team with shared escrow and team management features.</li>
+                <li><strong>"Startup"</strong> means a User that is a verified early-stage company with equity-based hiring options.</li>
+                <li><strong>"Job"</strong> means a project, task, or engagement posted by a Client on the Platform.</li>
+                <li><strong>"Proposal"</strong> means a bid or application submitted by a Freelancer in response to a Job.</li>
+                <li><strong>"Escrow"</strong> means funds held in a secure account pending completion of a Job or Milestone.</li>
+                <li><strong>"Milestone"</strong> means a defined deliverable within a Job that triggers a payment release.</li>
+                <li><strong>"Skill Challenge"</strong> means a timed, real-world task designed to assess a Freelancer's capabilities.</li>
+                <li><strong>"Trust Deposit"</strong> means the refundable $20 deposit required for Freelancer accounts.</li>
+                <li><strong>"KYC"</strong> means "Know Your Customer" – identity verification processes.</li>
+                <li><strong>"Platform Fee"</strong> means the 1%–2% maintenance fee charged on completed transactions.</li>
+            </ul>
+
+            <!-- Section 3 -->
+            <h2 id="sec-3">3. Account Types &amp; Eligibility</h2>
+            <h3>3.1 Eligibility</h3>
+            <p>You must be at least 18 years old and legally capable of entering into binding contracts. By registering, you represent and warrant that you meet these requirements. You must provide accurate, complete, and current information during registration.</p>
+
+            <h3>3.2 Account Types</h3>
+            <p>The Platform supports four account types:</p>
+            <ul>
+                <li><strong>Freelancer:</strong> Individuals offering services. Freelancers must complete KYC and pay a $20 refundable Trust Deposit.</li>
+                <li><strong>Client:</strong> Individuals or businesses posting jobs and hiring talent. Clients must complete KYC and fund Escrow for each Job.</li>
+                <li><strong>Agency:</strong> Multi-person teams with shared escrow, team management, and bulk listing capabilities.</li>
+                <li><strong>Startup:</strong> Verified early-stage companies offering equity-based compensation and priority visibility.</li>
+            </ul>
+            <p>You may only register one account. Account types cannot be combined or shared. Agency and Startup accounts require additional verification.</p>
+
+            <h3>3.3 Account Security</h3>
+            <p>You are responsible for maintaining the confidentiality of your login credentials. You are liable for all activities conducted through your account. Notify us immediately of any unauthorized use. We reserve the right to suspend accounts with suspicious activity.</p>
+
+            <!-- Section 4 -->
+            <h2 id="sec-4">4. KYC &amp; Identity Verification</h2>
+            <p>To ensure trust and security, all Users must complete Know Your Customer (KYC) verification before using the Platform's core features.</p>
+
+            <h3>4.1 Verification Documents</h3>
+            <ul>
+                <li><strong>National ID (NID):</strong> Required for all Users. Encrypted and never shared with other Users.</li>
+                <li><strong>Birth Certificate:</strong> Optional secondary document for additional verification.</li>
+                <li><strong>Business Registration:</strong> Required for Agency and Startup accounts.</li>
+                <li><strong>Proof of Address:</strong> May be requested for high-value transactions.</li>
+            </ul>
+
+            <h3>4.2 Data Protection</h3>
+            <p>All verification documents are encrypted and stored securely. We never share your KYC data with other Users. We may share data with third-party verification providers to validate authenticity. See our <a href="privacy.html">Privacy Policy</a> for more details.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-shield-alt"></i>
+                <strong>Privacy assurance:</strong> Your identity documents are used exclusively for verification and fraud prevention. They are never visible to other Users, and we do not sell or share them for marketing purposes.
+            </div>
+
+            <!-- Section 5 -->
+            <h2 id="sec-5">5. Trust Deposit &amp; Escrow</h2>
+
+            <h3>5.1 Freelancer Trust Deposit</h3>
+            <p>Freelancer accounts require a one-time refundable $20 trust deposit. This deposit:</p>
+            <ul>
+                <li>Is fully refundable after your first completed Job.</li>
+                <li>Demonstrates commitment and reduces spam/fraud.</li>
+                <li>Is held in a segregated trust fund account.</li>
+                <li>Can be withdrawn after completion of the first successful engagement.</li>
+            </ul>
+            <p>If a Freelancer violates these Terms or engages in fraudulent activity, the deposit may be forfeited to compensate affected Clients.</p>
+
+            <h3>5.2 Client Escrow</h3>
+            <p>Clients must fund Escrow for each Job before work begins. Escrow funds:</p>
+            <ul>
+                <li>Are held securely until Milestones are approved.</li>
+                <li>Are released to the Freelancer upon Client approval.</li>
+                <li>May be released in partial amounts for multi-Milestone Jobs.</li>
+                <li>Are returned to the Client if the Job is cancelled before work begins.</li>
+            </ul>
+
+            <h3>5.3 Escrow Disputes</h3>
+            <p>If a dispute arises regarding Milestone completion, we may hold funds pending resolution. We may review communication logs, work samples, and other evidence to reach a fair decision. Our decision is final and binding.</p>
+
+            <!-- Section 6 -->
+            <h2 id="sec-6">6. Job Listings &amp; Proposals</h2>
+
+            <h3>6.1 Posting Jobs</h3>
+            <p>Clients may post Jobs with the following details:</p>
+            <ul>
+                <li><strong>Title:</strong> A clear, descriptive title.</li>
+                <li><strong>Scope:</strong> A detailed description of the work required.</li>
+                <li><strong>Budget:</strong> The total budget or budget range.</li>
+                <li><strong>Milestones:</strong> Defined deliverables with associated amounts.</li>
+                <li><strong>Skill Challenge:</strong> Optional timed task for applicants.</li>
+                <li><strong>Skills:</strong> Required skills for the Job.</li>
+            </ul>
+            <p>Jobs must be genuine, legal, and accurately described. Misleading or fraudulent listings will be removed, and the Client's account may be suspended.</p>
+
+            <h3>6.2 Submitting Proposals</h3>
+            <p>Freelancers may submit Proposals in response to Jobs. Proposals should include:</p>
+            <ul>
+                <li><strong>Bid Amount:</strong> The total amount the Freelancer is quoting.</li>
+                <li><strong>Cover Note:</strong> A brief explanation of qualifications and approach.</li>
+                <li><strong>Portfolio Links:</strong> Relevant work samples (recommended).</li>
+            </ul>
+            <p>Proposals submitted using generic templates or irrelevant content may be flagged as spam and removed. AI spam filters are used to ensure quality.</p>
+
+            <h3>6.3 Selection and Hiring</h3>
+            <p>Clients may review Proposals, conduct interviews, and select the Freelancer they wish to hire. Once selected, the Client must fund Escrow before work begins. The Freelancer must accept the Job to formalize the engagement.</p>
+
+            <!-- Section 7 -->
+            <h2 id="sec-7">7. Skill Challenges</h2>
+            <p>Skill Challenges are optional, timed tasks designed to assess Freelancer capabilities. They are created by Clients and completed by Freelancers within a specified time limit.</p>
+
+            <h3>7.1 Challenge Format</h3>
+            <ul>
+                <li>Challenges are typically 4 minutes in duration.</li>
+                <li>Challenges test specific skills relevant to the Job.</li>
+                <li>Freelancers must complete the challenge before submitting a Proposal.</li>
+                <li>Challenge results are visible to the Client for review.</li>
+            </ul>
+
+            <h3>7.2 Challenge Integrity</h3>
+            <p>Freelancers must complete Challenges independently. Assistance from others or use of AI tools to automate responses is strictly prohibited. Violations will result in immediate account suspension.</p>
+
+            <h3>7.3 Client Review</h3>
+            <p>Clients may view challenge submissions and use them to inform hiring decisions. Challenge results are not shared with other Freelancers. Clients should evaluate submissions fairly and without bias.</p>
+
+            <!-- Section 8 -->
+            <h2 id="sec-8">8. Payments &amp; Fees</h2>
+
+            <h3>8.1 Platform Fee</h3>
+            <p>We charge a flat Platform Maintenance Fee of 1%–2% on each completed transaction. The fee is deducted from the Freelancer's earnings at the time of payment release. There are no hidden charges or setup fees.</p>
+
+            <h3>8.2 Payouts</h3>
+            <p>Freelancers may withdraw earnings via:</p>
+            <ul>
+                <li><strong>Local Methods:</strong> bKash, Nagad, Bank Transfer (zero markup).</li>
+                <li><strong>International:</strong> PayPal (standard fees may apply).</li>
+            </ul>
+            <p>Payouts are processed within 1–3 business days of Milestone approval. Minimum withdrawal amounts may apply.</p>
+
+            <h3>8.3 Currency</h3>
+            <p>All transactions are in USD unless otherwise specified. Local currency conversions are at the applicable exchange rate at the time of withdrawal.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-info-circle"></i>
+                <strong>Fee transparency:</strong> The 1%–2% platform fee covers hosting, verification, escrow management, and support. There are no hidden fees for local payouts. International withdrawals may incur standard PayPal fees.
+            </div>
+
+            <!-- Section 9 -->
+            <h2 id="sec-9">9. Dispute Resolution</h2>
+
+            <h3>9.1 Direct Resolution</h3>
+            <p>We encourage Users to resolve disputes directly and amicably. Open communication and good-faith negotiation are the first steps to resolving any disagreement.</p>
+
+            <h3>9.2 Mediation</h3>
+            <p>If direct resolution fails, Users may request mediation. We will review all relevant evidence, including:</p>
+            <ul>
+                <li>Communication logs (messages, emails).</li>
+                <li>Work samples and deliverables.</li>
+                <li>Milestone approvals and timeline records.</li>
+                <li>Escrow payment history.</li>
+            </ul>
+            <p>Our mediation decision is final and binding. We may release Escrow funds to the party we determine is entitled.</p>
+
+            <h3>9.3 Legal Claims</h3>
+            <p>If mediation fails, Users may pursue legal claims in the courts of Bangladesh. The laws of Bangladesh govern these Terms. Users agree to submit to the exclusive jurisdiction of the courts in Dhaka, Bangladesh.</p>
+
+            <!-- Section 10 -->
+            <h2 id="sec-10">10. Termination &amp; Suspension</h2>
+
+            <h3>10.1 Termination by User</h3>
+            <p>You may terminate your account at any time by contacting us. Upon termination:</p>
+            <ul>
+                <li>Ongoing Jobs must be completed or cancelled.</li>
+                <li>Escrow funds will be released according to the current state of work.</li>
+                <li>The Trust Deposit will be refunded if conditions are met.</li>
+            </ul>
+
+            <h3>10.2 Suspension by Felicek</h3>
+            <p>We may suspend or terminate accounts for violations of these Terms, including:</p>
+            <ul>
+                <li>Fraud, misrepresentation, or identity theft.</li>
+                <li>Posting illegal, offensive, or prohibited content.</li>
+                <li>Failure to complete KYC or maintain accurate information.</li>
+                <li>Abuse of the Platform, including harassment or spam.</li>
+                <li>Circumvention of Escrow or fee structures.</li>
+                <li>Repeated disputes or poor performance ratings.</li>
+            </ul>
+            <p>Suspended accounts may have Escrow funds held pending investigation. Deposits may be forfeited to compensate affected parties.</p>
+
+            <!-- Section 11 -->
+            <h2 id="sec-11">11. Data Privacy</h2>
+            <p>Your privacy is important to us. This section summarizes our data practices. For full details, see our <a href="privacy.html">Privacy Policy</a>.</p>
+
+            <h3>11.1 Data We Collect</h3>
+            <ul>
+                <li><strong>Account Data:</strong> Name, email, phone, profile details, role.</li>
+                <li><strong>Verification Data:</strong> ID documents, proof of address, business registration.</li>
+                <li><strong>Activity Data:</strong> Job listings, proposals, messages, transactions, challenge results.</li>
+                <li><strong>Technical Data:</strong> IP address, device type, browser, cookies.</li>
+            </ul>
+
+            <h3>11.2 How We Use Data</h3>
+            <ul>
+                <li>To create and manage your account.</li>
+                <li>To verify your identity and enforce trust standards.</li>
+                <li>To facilitate transactions and Escrow management.</li>
+                <li>To send important notifications (job updates, messages, payments).</li>
+                <li>To improve our platform and prevent fraud/spam.</li>
+            </ul>
+
+            <h3>11.3 Data Sharing</h3>
+            <p>We do not sell your data. We share information only with:</p>
+            <ul>
+                <li><strong>Other Users:</strong> Your profile and job history are visible to potential employers/freelancers.</li>
+                <li><strong>Payment Providers:</strong> To process transactions.</li>
+                <li><strong>Verification Providers:</strong> For identity verification.</li>
+                <li><strong>Legal Authorities:</strong> When required by law.</li>
+            </ul>
+
+            <!-- Section 12 -->
+            <h2 id="sec-12">12. User Conduct</h2>
+            <p>All Users agree to conduct themselves professionally and ethically. Prohibited activities include:</p>
+            <ul>
+                <li>Fraud, impersonation, or identity theft.</li>
+                <li>Posting jobs that are illegal, offensive, or discriminatory.</li>
+                <li>Plagiarism or misrepresentation of qualifications.</li>
+                <li>Harassment, threats, or abusive language.</li>
+                <li>Spamming, irrelevant proposals, or generic applications.</li>
+                <li>Circumventing platform fees or Escrow.</li>
+                <li>Sharing account credentials or using another User's account.</li>
+                <li>Reverse engineering or scraping platform data.</li>
+            </ul>
+            <p>Violations will result in account suspension or termination. Legal action may be pursued.</p>
+
+            <!-- Section 13 -->
+            <h2 id="sec-13">13. Intellectual Property</h2>
+
+            <h3>13.1 Platform IP</h3>
+            <p>Felicek owns all intellectual property rights in the Platform, including the software, design, content, trademarks, and branding. You may not copy, modify, distribute, or create derivative works without our express written consent.</p>
+
+            <h3>13.2 User IP</h3>
+            <p>Users retain ownership of their content (job descriptions, proposals, work products). By posting content, you grant us a non-exclusive, worldwide, royalty-free license to display and promote your content on the Platform.</p>
+
+            <h3>13.3 Copyright Policy</h3>
+            <p>We respect intellectual property rights. If you believe your work has been copied in a way that constitutes infringement, please contact us with details. We will respond promptly.</p>
+
+            <!-- Section 14 -->
+            <h2 id="sec-14">14. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, Felicek and its affiliates, officers, directors, employees, and agents are not liable for:</p>
+            <ul>
+                <li>Any indirect, incidental, special, consequential, or punitive damages.</li>
+                <li>Loss of profits, revenue, data, or business opportunities.</li>
+                <li>Any damages arising from the quality, reliability, or legality of services provided by Users.</li>
+                <li>Any failure, delay, or disruption of the Platform.</li>
+                <li>Any unauthorized access to or alteration of your data.</li>
+            </ul>
+            <p>Our total liability is limited to the total amount paid by you to us in the six months preceding the claim. This limitation applies regardless of the legal theory.</p>
+
+            <div class="highlight-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>No guarantee of job outcomes:</strong> Felicek is a platform connecting Users. We do not guarantee job outcomes, freelancer performance, or client payment. Users are responsible for evaluating each other.
+            </div>
+
+            <!-- Section 15 -->
+            <h2 id="sec-15">15. Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless Felicek and its affiliates from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from:</p>
+            <ul>
+                <li>Your use of the Platform.</li>
+                <li>Your violation of these Terms.</li>
+                <li>Your infringement of any third-party rights.</li>
+                <li>Any disputes between you and other Users.</li>
+            </ul>
+
+            <!-- Section 16 -->
+            <h2 id="sec-16">16. Governing Law</h2>
+            <p>These Terms are governed by the laws of Bangladesh, without regard to conflict of law principles. All disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts in Dhaka, Bangladesh.</p>
+
+            <p>Users outside Bangladesh acknowledge that their data may be transferred to and processed in Bangladesh or other jurisdictions where we operate.</p>
+
+            <!-- Section 17 -->
+            <h2 id="sec-17">17. Changes to Terms</h2>
+            <p>We may update these Terms from time to time. Changes will be posted on this page with an updated effective date. For material changes, we will notify Users via email or in-app notification.</p>
+
+            <p>By continuing to use the Platform after changes take effect, you agree to the revised Terms. If you do not agree, you must stop using the Platform and terminate your account.</p>
+
+            <!-- Section 18 -->
+            <h2 id="sec-18">18. Contact Us</h2>
+            <p>If you have questions about these Terms or the Platform, please contact us:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:legal@felicek.com">legal@felicek.com</a></li>
+                <li><strong>Support:</strong> <a href="mailto:support@felicek.com">support@felicek.com</a></li>
+                <li><strong>Address:</strong> Felicek Platform, Dhaka, Bangladesh</li>
+                <li><strong>Phone:</strong> +880 1234 567890</li>
+            </ul>
+            <p>We aim to respond to all inquiries within 48 business hours.</p>
+
+        </div>
+
+        <!-- ─── FOOTER ─── -->
+        <div class="legal-footer">
+            <span>&copy; 2026 Felicek. All rights reserved.</span>
+            <div class="social">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <span>
+                <a href="privacy.html">Privacy</a> &middot;
+                <a href="terms.html">Terms</a> &middot;
+                <a href="index.html">Home</a>
+            </span>
+        </div>
+
+    </div>
+
+    <script>
+        // ─── Back to Top Button ───
+        (function() {
+            const backTop = document.getElementById('backTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 400) {
+                    backTop.classList.add('visible');
+                } else {
+                    backTop.classList.remove('visible');
+                }
+            });
+
+            backTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Smooth scroll for TOC links
+            document.querySelectorAll('.toc-grid a').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            console.log('📄 Felicek Terms & Conditions loaded.');
+        })();
+    </script>
+
+</body>
+</html>
