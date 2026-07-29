@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Platform Features — Felicek</title>
+
+    <!-- Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ==========================================================================
+           THEME SYSTEM & DESIGN VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-light: #fbf9f5;
+            --bg-card: #f3efe6;
+            --bg-card-inner: #ffffff;
+            --bg-dark-footer: #0b111e;
+            
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --text-footer: #9ca3af;
+            
+            --brand-teal: #0d9488;
+            --brand-teal-bright: #00897b;
+            --accent-green: #10b981;
+            
+            --border-light: rgba(0, 0, 0, 0.08);
+            --border-strong: rgba(0, 0, 0, 0.16);
+            --border-teal: rgba(13, 148, 136, 0.3);
+            
+            --font-serif: 'Newsreader', serif;
+            --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+            --max-width: 1140px;
+            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.dark-mode {
+            --bg-light: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-inner: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-strong: rgba(255, 255, 255, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3, h4, .serif-heading {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .text-teal { color: var(--brand-teal-bright) !important; }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: rgba(13, 148, 136, 0.1);
+            border: 1px solid var(--border-teal);
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            text-transform: uppercase;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .btn-sm { padding: 8px 16px; font-size: 13px; border-radius: 6px; }
+        .btn-teal { background: var(--brand-teal); color: #ffffff; }
+        .btn-teal:hover { background: var(--brand-teal-bright); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-strong); color: var(--text-main); }
+
+        /* Header */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: var(--font-serif); font-size: 34px; font-weight: 700; display: flex; align-items: center; }
+        .logo .dot { width: 8px; height: 8px; background-color: var(--brand-teal); border-radius: 50%; display: inline-block; margin-left: 2px; }
+        .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand-teal); }
+
+        /* Page Banner */
+        .page-banner {
+            padding: 60px 0 40px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .page-title { font-size: 52px; line-height: 1.1; margin: 16px 0; }
+        .page-subtitle { font-size: 18px; color: var(--text-muted); max-width: 680px; margin: 0 auto; }
+
+        /* Content Sections */
+        .section-padding { padding: 80px 0; border-top: 1px solid var(--border-light); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+
+        .feature-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .step-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: var(--brand-teal);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer.site-footer {
+            background-color: var(--bg-dark-footer);
+            color: #ffffff;
+            padding: 60px 0 40px 0;
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
+        .footer-logo .dot { width: 6px; height: 6px; background: var(--brand-teal); display: inline-block; border-radius: 50%; }
+
+        @media (max-width: 900px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Felicek<span class="dot"></span></a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html" class="active">Features</a></li>
+                <li><a href="index.html#demo">App Demo</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline btn-sm" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+                <a href="index.html" class="btn btn-teal btn-sm"><i class="fas fa-shield-alt"></i> Reserve Beta Seat</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+        <div class="container">
+            <span class="badge-pill"><i class="fas fa-cubes"></i> Core Platform Architecture</span>
+            <h1 class="page-title">Engineering High-Trust <br /><span class="text-teal">Contract Execution</span></h1>
+            <p class="page-subtitle">
+                Explore how Felicek replaces bloated marketplace legacy systems with identity verification, automated escrow vaults, and skill-first hiring.
+            </p>
+        </div>
+    </section>
+
+    <!-- FEATURE 1: KYC IDENTITY VERIFICATION -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <span class="badge-pill" style="margin-bottom: 12px;"><i class="fas fa-user-check"></i> Zero Bot Policy</span>
+                    <h2 style="font-size: 36px; margin-bottom: 16px;">1. Government-Grade Identity Verification</h2>
+                    <p style="color: var(--text-muted); font-size: 15px; line-height: 1.7;">
+                        The biggest flaw in current freelance platforms is proposal spam from unverified AI bots and fake multi-accounting rings. Felicek mandates biometric and legal identity verification before any contract can be created or applied for.
+                    </p>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-num">1</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Official Passport/ID Verification</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Encrypted processing via Stripe Identity infrastructure.</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">2</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Biometric Liveness Check</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Ensures every account corresponds to a real, singular human entity.</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">3</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Spam-Free Proposal Inbox</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Clients receive 90% fewer proposals, but 100% of them come from verified professionals.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <i class="fas fa-shield-halved text-teal" style="font-size: 48px; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">KYC Security Shield</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+                        By eliminating anonymous accounts, dispute fraud drops by over 80%, guaranteeing a safer hiring environment for both startups and agencies.
+                    </p>
+                    <div style="background: var(--bg-card-inner); padding: 16px; border-radius: 12px; border: 1px solid var(--border-light);">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                            <span>Verified Badge Status</span>
+                            <span class="text-teal"><i class="fas fa-check-circle"></i> Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE 2: MILESTONE ESCROW VAULT -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="grid-2">
+                <div class="feature-box">
+                    <i class="fas fa-vault text-teal" style="font-size: 48px; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">Automated Escrow Protocol</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+                        Funds are safely sequestered in regulated banking escrow prior to work initiation. Release occurs seamlessly upon milestone sign-off.
+                    </p>
+                    <div style="background: var(--bg-card-inner); padding: 16px; border-radius: 12px; border: 1px solid var(--border-light);">
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                            <span>Escrow Protection</span>
+                            <span style="color: var(--accent-green);"><i class="fas fa-lock"></i> 100% Secured</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span class="badge-pill" style="margin-bottom: 12px;"><i class="fas fa-lock"></i> Financial Safety</span>
+                    <h2 style="font-size: 36px; margin-bottom: 16px;">2. Milestone Escrow Vault</h2>
+                    <p style="color: var(--text-muted); font-size: 15px; line-height: 1.7;">
+                        Freelancers shouldn't have to worry about unpaid invoices, and clients shouldn't risk paying upfront for incomplete work. Felicek's Escrow Vault solves both problems simultaneously.
+                    </p>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-num">1</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Milestone Deposit</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Client funds individual milestone deliverables before work starts.</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">2</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Code & Design Delivery</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Freelancer submits assets directly through linked GitHub or Figma feeds.</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">3</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Instant Payout Release</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Funds unlock instantly to the freelancer with low 1–2% platform deduction.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE 3: DIRECT SKILL CHALLENGES -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <span class="badge-pill" style="margin-bottom: 12px;"><i class="fas fa-code"></i> Proof of Skill</span>
+                    <h2 style="font-size: 36px; margin-bottom: 16px;">3. Direct Skill Challenges</h2>
+                    <p style="color: var(--text-muted); font-size: 15px; line-height: 1.7;">
+                        Instead of reading generic cover letters, clients can set short micro-challenges or link repository tasks. Talent proves capability through execution, reducing hiring review time from days to minutes.
+                    </p>
+                    <div class="step-list">
+                        <div class="step-item">
+                            <div class="step-num">1</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Benchmark Creation</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Clients specify real-world mini tasks or code reviews.</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">2</div>
+                            <div>
+                                <strong style="display: block; font-size: 15px;">Interactive Submission</strong>
+                                <span style="font-size: 13px; color: var(--text-muted);">Freelancers attach live demos or code snippets in 1 click.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-box">
+                    <i class="fas fa-laptop-code text-teal" style="font-size: 48px; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">Skill-First Matching</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+                        Evaluate developers on technical execution, clean architecture, and UI precision rather than marketing buzzwords.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">Felicek<span class="dot"></span></div>
+                    <p style="font-size: 13px; color: var(--text-footer);">Identity verified marketplace with 1–2% flat escrow rates.</p>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Platform</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="index.html#offer">What We Offer</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="index.html#calculator">Fee Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Company</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#founder">Founder Spotlight</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Legal</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 24px; font-size: 13px; color: var(--text-footer);">
+                <span>© 2026 Felicek Inc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Theme Toggle
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

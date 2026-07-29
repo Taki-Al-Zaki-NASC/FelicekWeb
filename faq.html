@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frequently Asked Questions — Felicek</title>
+
+    <!-- Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ==========================================================================
+           THEME SYSTEM & DESIGN VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-light: #fbf9f5;
+            --bg-card: #f3efe6;
+            --bg-card-inner: #ffffff;
+            --bg-dark-footer: #0b111e;
+            
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --text-footer: #9ca3af;
+            
+            --brand-teal: #0d9488;
+            --brand-teal-bright: #00897b;
+            --accent-green: #10b981;
+            
+            --border-light: rgba(0, 0, 0, 0.08);
+            --border-strong: rgba(0, 0, 0, 0.16);
+            --border-teal: rgba(13, 148, 136, 0.3);
+            
+            --font-serif: 'Newsreader', serif;
+            --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+            --max-width: 1140px;
+            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.dark-mode {
+            --bg-light: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-inner: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-strong: rgba(255, 255, 255, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3, h4, .serif-heading {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .text-teal { color: var(--brand-teal-bright) !important; }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: rgba(13, 148, 136, 0.1);
+            border: 1px solid var(--border-teal);
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            text-transform: uppercase;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .btn-sm { padding: 8px 16px; font-size: 13px; border-radius: 6px; }
+        .btn-teal { background: var(--brand-teal); color: #ffffff; }
+        .btn-teal:hover { background: var(--brand-teal-bright); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-strong); color: var(--text-main); }
+
+        /* Header */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: var(--font-serif); font-size: 34px; font-weight: 700; display: flex; align-items: center; }
+        .logo .dot { width: 8px; height: 8px; background-color: var(--brand-teal); border-radius: 50%; display: inline-block; margin-left: 2px; }
+        .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand-teal); }
+
+        /* Page Banner & Search */
+        .page-banner {
+            padding: 60px 0 40px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .page-title { font-size: 52px; line-height: 1.1; margin: 16px 0; }
+        .page-subtitle { font-size: 18px; color: var(--text-muted); max-width: 680px; margin: 0 auto 32px auto; }
+
+        .search-box {
+            max-width: 540px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 16px 20px 16px 48px;
+            border-radius: 12px;
+            border: 1px solid var(--border-strong);
+            background: var(--bg-card-inner);
+            color: var(--text-main);
+            font-size: 15px;
+            font-family: var(--font-sans);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+        .search-box input:focus {
+            border-color: var(--brand-teal);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0 32px 0;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--border-light);
+            background: var(--bg-card);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--brand-teal);
+            color: #ffffff;
+            border-color: var(--brand-teal);
+        }
+
+        /* FAQ Content */
+        .faq-section-wrapper {
+            max-width: 760px;
+            margin: 0 auto 80px auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+        .faq-item:hover {
+            border-color: var(--border-strong);
+        }
+        .faq-question {
+            padding: 22px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .faq-answer {
+            padding: 0 24px 22px 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            display: none;
+        }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--brand-teal); }
+        .faq-question i { transition: transform 0.25s ease; }
+
+        /* Footer */
+        footer.site-footer {
+            background-color: var(--bg-dark-footer);
+            color: #ffffff;
+            padding: 60px 0 40px 0;
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
+        .footer-logo .dot { width: 6px; height: 6px; background: var(--brand-teal); display: inline-block; border-radius: 50%; }
+
+        @media (max-width: 900px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Felicek<span class="dot"></span></a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="index.html#demo">App Demo</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+            </ul>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline btn-sm" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+                <a href="index.html" class="btn btn-teal btn-sm"><i class="fas fa-shield-alt"></i> Reserve Beta Seat</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE BANNER & LIVE SEARCH -->
+    <section class="page-banner">
+        <div class="container">
+            <span class="badge-pill"><i class="fas fa-circle-question"></i> Knowledge Base</span>
+            <h1 class="page-title">How can we help you?</h1>
+            <p class="page-subtitle">Find answers regarding KYC onboarding, escrow vaults, fee calculations, and legal dispute protection.</p>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="faqSearchInput" placeholder="Search keywords (e.g. KYC, Escrow, 1%, Stripe, Fees)..." />
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN FAQ SECTION -->
+    <section style="padding: 20px 0 80px 0;">
+        <div class="container">
+            
+            <!-- Category Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-category="all">All Topics</button>
+                <button class="tab-btn" data-category="general">General & Beta</button>
+                <button class="tab-btn" data-category="kyc">KYC & Verification</button>
+                <button class="tab-btn" data-category="escrow">Escrow & Fees</button>
+                <button class="tab-btn" data-category="disputes">Disputes & Safety</button>
+            </div>
+
+            <!-- FAQ Items List -->
+            <div class="faq-section-wrapper" id="faqContainer">
+                
+                <!-- General -->
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">What is Felicek and how is it different from Upwork or Fiverr? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Felicek is an identity-verified freelancing marketplace that eliminates 20–25% platform commissions. We charge a flat 1–2% platform rate, enforce real identity KYC for both clients and freelancers, and use direct milestone escrow accounts.</div>
+                </div>
+
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">Who qualifies for Phase 1 Private Beta access? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Phase 1 access is strictly capped at 2,000 total seats (500 each for Freelancers, Individual Clients, Startups, and Agencies). Early applicants lock in guaranteed 1% lifetime platform fee rates.</div>
+                </div>
+
+                <!-- KYC & Verification -->
+                <div class="faq-item" data-category="kyc">
+                    <div class="faq-question">Why is government ID verification mandatory before posting or bidding? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Mandatory identity verification prevents automated bot spam, fake profiles, and multi-accounting scams. It guarantees that clients only review proposals from real, vetted professionals.</div>
+                </div>
+
+                <div class="faq-item" data-category="kyc">
+                    <div class="faq-question">How is my personal identity data stored and secured? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Felicek never stores raw identity documents on our primary servers. All document scanning and facial liveness checks are processed through Stripe Identity with end-to-end encryption.</div>
+                </div>
+
+                <!-- Escrow & Fees -->
+                <div class="faq-item" data-category="escrow">
+                    <div class="faq-question">How does Felicek maintain flat 1–2% platform fees? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">By leveraging automated milestone contracts and identity-driven trust, we eliminate high administrative overhead. We don't take a quarter of your paycheck just to facilitate a contract.</div>
+                </div>
+
+                <div class="faq-item" data-category="escrow">
+                    <div class="faq-question">What is the separate 4% payment processing fee? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">The 4% fee covers credit card gateway charges, bank compliance, anti-fraud monitoring, and global currency transfers directly through our payment banking partners.</div>
+                </div>
+
+                <div class="faq-item" data-category="escrow">
+                    <div class="faq-question">When are escrow funds released to the freelancer? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Clients deposit funds into the Escrow Vault at the start of a milestone. Once the freelancer submits the work and the client approves it, funds are unlocked and transferred immediately.</div>
+                </div>
+
+                <!-- Disputes & Safety -->
+                <div class="faq-item" data-category="disputes">
+                    <div class="faq-question">How does dispute resolution work if a client or freelancer disagrees? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Because both parties are identity-verified and milestones are documented via linked code or design submissions, disputes are resolved objectively by neutral arbitrators using submitted work records.</div>
+                </div>
+
+                <div class="faq-item" data-category="disputes">
+                    <div class="faq-question">What happens if a client abandons an active contract? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">If work has been submitted to escrow and the client becomes unresponsive for 14 calendar days, the system automatically releases the milestone funds to the freelancer.</div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">Felicek<span class="dot"></span></div>
+                    <p style="font-size: 13px; color: var(--text-footer);">Identity verified marketplace with 1–2% flat escrow rates.</p>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Platform</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="index.html#offer">What We Offer</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="index.html#calculator">Fee Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Company</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#founder">Founder Spotlight</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Legal</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 24px; font-size: 13px; color: var(--text-footer);">
+                <span>© 2026 Felicek Inc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Theme Toggle
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // FAQ Accordion Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Category Filter Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const cat = btn.dataset.category;
+                faqItems.forEach(item => {
+                    if (cat === 'all' || item.dataset.category === cat) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Live Keyword Search Input
+        const searchInput = document.getElementById('faqSearchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            
+            // Reset active category tab to 'All Topics' when typing
+            if (query !== '') {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabBtns[0].classList.add('active');
+            }
+
+            faqItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

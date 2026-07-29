@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Felicek — Verified Freelance & Hiring Platform</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Newsreader:opsz,ital,wght@6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- 🚀 সঠিক SVG Favicon লিঙ্ক -->
+<link rel="icon" type="image/svg+xml" href="Felicek.svg?v=1" />
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-page: #f4f1ea;
+            --surface-card: #ffffff;
+            --surface-subtle: #eae7df;
+            --surface-dark: #161e27;
+            --text-primary: #121820;
+            --text-secondary: #525b68;
+            --text-muted: #8892a0;
+            --brand-teal: #0d9488;
+            --brand-teal-hover: #0a736a;
+            --brand-teal-light: #e6f7f5;
+            --brand-teal-border: #b2e4df;
+            --brand-navy: #1c2534;
+            --brand-navy-hover: #2a364a;
+            --accent-amber: #d97706;
+            --accent-amber-light: #fef3c7;
+            --border-subtle: rgba(18, 24, 32, 0.08);
+            --border-medium: rgba(18, 24, 32, 0.15);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Newsreader', Georgia, serif;
+            --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Dark Mode Override Support */
+        body.dark-mode {
+            --bg-page: #0f141c;
+            --surface-card: #18202c;
+            --surface-subtle: #222c3a;
+            --text-primary: #f0f4f8;
+            --text-secondary: #9cb0c6;
+            --text-muted: #64788e;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-medium: rgba(255, 255, 255, 0.16);
+        }
+
+        /* ==========================================================================
+           2. BASE RESET & TYPOGRAPHY
+           ========================================================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Typography Helpers */
+        .serif { font-family: var(--font-serif); }
+        .text-teal { color: var(--brand-teal); }
+        .text-muted { color: var(--text-muted); }
+        .text-center { text-align: center; }
+
+        /* ==========================================================================
+           3. BUTTONS & UI COMPONENTS
+           ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .btn-teal {
+            background-color: var(--brand-teal);
+            color: #ffffff;
+        }
+        .btn-teal:hover {
+            background-color: var(--brand-teal-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-navy {
+            background-color: var(--brand-navy);
+            color: #ffffff;
+        }
+        .btn-navy:hover {
+            background-color: var(--brand-navy-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--border-medium);
+            color: var(--text-primary);
+        }
+        .btn-outline:hover {
+            background-color: var(--surface-card);
+            border-color: var(--text-primary);
+        }
+
+        .btn-sm {
+            padding: 8px 14px;
+            font-size: 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-teal { background: var(--brand-teal-light); color: var(--brand-teal); border: 1px solid var(--brand-teal-border); }
+        .badge-amber { background: var(--accent-amber-light); color: var(--accent-amber); }
+
+        /* ==========================================================================
+           4. TOP ANNOUNCEMENT BANNER & HEADER
+           ========================================================================== */
+        .top-banner {
+            background: var(--brand-navy);
+            color: #ffffff;
+            font-size: 12px;
+            padding: 8px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+        .top-banner strong { color: var(--brand-teal-border); }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(244, 241, 234, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all var(--transition-fast);
+        }
+        body.dark-mode .site-header { background: rgba(15, 20, 28, 0.92); }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .logo .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--brand-teal);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ==========================================================================
+           5. HERO SECTION
+           ========================================================================== */
+        .hero {
+            padding: 80px 0 60px;
+            position: relative;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 52px;
+            line-height: 1.12;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 540px;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+
+        .feature-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .chip {
+            background: var(--surface-card);
+            border: 1px solid var(--border-subtle);
+            padding: 8px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+        .chip i { color: var(--brand-teal); }
+
+        /* Beta Registration Tracker Card */
+        .beta-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .beta-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .progress-bar-container {
+            background: var(--surface-subtle);
+            height: 12px;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin: 16px 0 12px;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--brand-teal), #14b8a6);
+            height: 100%;
+            width: 34%;
+            transition: width 0.6s ease;
+        }
+
+        /* ==========================================================================
+           6. EXPLAINER: HOW IT WORKS (CLIENT VS FREELANCER)
+           ========================================================================== */
+        .guide-section {
+            padding: 80px 0;
+            background: var(--surface-card);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 50px;
+        }
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .toggle-tabs {
+            display: inline-flex;
+            background: var(--surface-subtle);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            margin-bottom: 40px;
+        }
+        .toggle-tab-btn {
+            padding: 10px 24px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .toggle-tab-btn.active {
+            background: var(--surface-card);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .step-card {
+            background: var(--bg-page);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            position: relative;
+        }
+        .step-card .num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--brand-teal);
+            color: #ffffff;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .step-card h3 { font-size: 18px; margin-bottom: 10px; }
+        .step-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ==========================================================================
+           7. INTERACTIVE APP SIMULATOR (THE EMBEDDED SPA DEMO)
+           ========================================================================== */
+        .demo-section {
+            padding: 90px 0;
+            background: var(--bg-page);
+        }
+
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .demo-instructions {
+            background: var(--surface-card);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+        }
+        .demo-instructions h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-step-item {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed var(--border-subtle);
+        }
+        .guide-step-item:last-child { border-bottom: none; }
+        .guide-step-item strong { display: block; font-size: 14px; color: var(--text-primary); margin-bottom: 4px; }
+        .guide-step-item p { font-size: 13px; color: var(--text-secondary); }
+
+        /* Mobile Viewport Simulation Shell */
+        .phone-shell {
+            max-width: 420px;
+            margin: 0 auto;
+            background: var(--surface-dark);
+            border-radius: 40px;
+            padding: 14px;
+            box-shadow: var(--shadow-lg);
+            border: 4px solid #2d3748;
+        }
+
+        .phone-screen {
+            background: var(--bg-page);
+            border-radius: 28px;
+            overflow: hidden;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .app-topbar {
+            background: var(--surface-card);
+            padding: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-body {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .app-nav {
+            background: var(--surface-card);
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .app-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+        .app-nav-item.active { color: var(--brand-teal); }
+
+        .job-item-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: transform var(--transition-fast);
+        }
+        .job-item-card:hover { transform: translateY(-2px); border-color: var(--brand-teal); }
+
+        /* ==========================================================================
+           8. FEE SAVINGS CALCULATOR TABLE
+           ========================================================================== */
+        .calculator-section {
+            padding: 80px 0;
+            background: var(--surface-card);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .calc-box {
+            background: var(--bg-page);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .calc-input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .calc-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border-medium);
+            accent-color: var(--brand-teal);
+            cursor: pointer;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .comparison-table th { color: var(--text-muted); font-size: 12px; text-transform: uppercase; }
+
+        /* ==========================================================================
+           9. FAQ ACCORDION SECTION
+           ========================================================================== */
+        .faq-section {
+            padding: 80px 0;
+        }
+
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--surface-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .faq-question {
+            width: 100%;
+            padding: 20px 24px;
+            text-align: left;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .faq-answer {
+            padding: 0 24px 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            display: none;
+        }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-item.open .faq-question i { transform: rotate(180deg); }
+
+        /* ==========================================================================
+           10. SITE FOOTER
+           ========================================================================== */
+        .site-footer {
+            background: var(--surface-dark);
+            color: #a0aec0;
+            padding: 80px 0 32px;
+            font-size: 14px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+        .footer-logo {
+            font-family: var(--font-serif);
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #a0aec0;
+            transition: color var(--transition-fast);
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(13, 148, 136, 0.15);
+            color: #2dd4bf;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           11. MODAL SYSTEM
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 20, 28, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay.active { display: flex; animation: modalFadeIn 0.25s ease; }
+
+        .modal-box {
+            background: var(--surface-card);
+            border-radius: var(--radius-lg);
+            max-width: 480px;
+            width: 100%;
+            padding: 36px;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-medium);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            background: var(--bg-page);
+            color: var(--text-primary);
+            transition: border-color var(--transition-fast);
+        }
+        .form-control:focus {
+            border-color: var(--brand-teal);
+            background: var(--surface-card);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero-grid, .demo-layout, .calc-box, .steps-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { display: none; }
+            .hero-title { font-size: 38px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BANNER -->
+    <div class="top-banner">
+        🚀 Phase 1 Private Beta is now live in South Asia & Europe. <strong>Spots are limited to 500 verified users.</strong>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo">Felicek<span class="dot"></span></a>
+            
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#demo">Interactive App Demo</a></li>
+                <li><a href="#calculator">Fee Savings</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="btn btn-outline btn-sm" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+                <button class="btn btn-teal btn-sm" id="headerAccessBtn"><i class="fas fa-shield-alt"></i> Request Access</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="badge badge-teal" style="margin-bottom: 16px;"><i class="fas fa-check-circle"></i> Identity Verified Marketplace</span>
+                <h1 class="hero-title">Verified talent.<br /><span class="text-teal">Zero spam.</span> Fair 1–2% fees.</h1>
+                <p class="hero-subtitle">
+                    Felicek replaces traditional 20% platform commissions and proposal spam with KYC verification, escrow protection, and direct skill challenges.
+                </p>
+
+                <div class="hero-cta-group">
+                    <button class="btn btn-teal" id="heroRegisterBtn"><i class="fas fa-user-check"></i> Join Private Beta</button>
+                    <a href="#demo" class="btn btn-navy"><i class="fas fa-mobile-alt"></i> Test Live App View</a>
+                </div>
+
+                <div class="feature-chips">
+                    <div class="chip"><i class="fas fa-lock"></i> Escrow Locked Upfront</div>
+                    <div class="chip"><i class="fas fa-id-card"></i> KYC Verified Accounts</div>
+                    <div class="chip"><i class="fas fa-bolt"></i> 1–2% Flat Commission</div>
+                </div>
+            </div>
+
+            <!-- Beta Spot Reservation Tracker Box -->
+            <div class="beta-card">
+                <div class="beta-card-header">
+                    <span class="badge badge-amber"><i class="fas fa-fire"></i> High Demand</span>
+                    <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Phase 1 Access</span>
+                </div>
+                <h3>Reserved Beta Access Slots</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="betaProgressFill"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600;">
+                    <span><strong id="slotCounterText">170</strong> / 500 Claimed</span>
+                    <span class="text-teal" id="slotPercentageText">34%</span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 16px; line-height: 1.5;">
+                    Reserving your spot locks in lifetime access to 1% platform fees upon official public launch.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUIDED WALKTHROUGH SECTION -->
+    <section class="guide-section" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Designed for Clarity & Trust</h2>
+                <p>Choose your journey to see how Felicek replaces outdated freelance agency overheads.</p>
+                <br />
+                <div class="toggle-tabs">
+                    <button class="toggle-tab-btn active" id="tabClientBtn">For Clients & Startups</button>
+                    <button class="toggle-tab-btn" id="tabFreelancerBtn">For Freelancers</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Steps Container -->
+            <div class="steps-grid" id="stepsGridContainer">
+                <!-- Javascript populates step cards based on active tab -->
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE APP SIMULATOR SECTION -->
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <div class="section-header">
+                <h2>Interactive In-Browser Application</h2>
+                <p>Try out the client and freelancer dashboard flows right now without installing anything.</p>
+            </div>
+
+            <div class="demo-layout">
+                <!-- Guided Navigation Panel -->
+                <div class="demo-instructions">
+                    <h3><i class="fas fa-sliders-h text-teal"></i> App Controls</h3>
+                    
+                    <div class="guide-step-item">
+                        <strong>1. Select Platform Role</strong>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <button class="btn btn-sm btn-teal" id="simRoleFreelancer">Freelancer Mode</button>
+                            <button class="btn btn-sm btn-outline" id="simRoleClient">Client Mode</button>
+                        </div>
+                    </div>
+
+                    <div class="guide-step-item">
+                        <strong>2. Test Interactive Actions</strong>
+                        <p>Click on any job card inside the mobile frame to view milestone escrow breakdowns and test the live skill challenge submission modal.</p>
+                    </div>
+
+                    <div class="guide-step-item">
+                        <strong>3. Inspect the $20 Trust Vault</strong>
+                        <p>Switch to the <em>Vault</em> tab inside the phone simulator to see how refundable anti-spam deposits work.</p>
+                    </div>
+
+                    <button class="btn btn-teal btn-block" id="demoClaimAccessBtn" style="width: 100%; margin-top: 16px;">
+                        <i class="fas fa-check-circle"></i> Reserve Beta Spot Now
+                    </button>
+                </div>
+
+                <!-- Phone Viewport Screen -->
+                <div class="phone-shell">
+                    <div class="phone-screen">
+                        <!-- App Topbar -->
+                        <div class="app-topbar">
+                            <span class="serif" style="font-weight: 700; font-size: 18px;">Felicek<span style="color: var(--brand-teal);">.</span></span>
+                            <span class="badge badge-teal" id="simRoleBadge">Freelancer</span>
+                        </div>
+
+                        <!-- Dynamic App Screen Body -->
+                        <div class="app-body" id="appBodyContent">
+                            <!-- Populated via JavaScript SPA State engine -->
+                        </div>
+
+                        <!-- App Bottom Navigation Bar -->
+                        <div class="app-nav">
+                            <button class="app-nav-item active" data-apptab="jobs">
+                                <i class="fas fa-briefcase"></i> Jobs
+                            </button>
+                            <button class="app-nav-item" data-apptab="proposals">
+                                <i class="fas fa-paper-plane"></i> Active
+                            </button>
+                            <button class="app-nav-item" data-apptab="vault">
+                                <i class="fas fa-vault"></i> Vault
+                            </button>
+                            <button class="app-nav-item" data-apptab="profile">
+                                <i class="fas fa-user"></i> Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR & COMPARISON SECTION -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2>Compare Platform Savings</h2>
+                <p>See how much more you keep on a $5,000 project compared to industry incumbents.</p>
+            </div>
+
+            <div class="calc-box">
+                <div>
+                    <div class="calc-input-group">
+                        <label for="projectBudgetSlider">Project Budget ($ USD): <span id="budgetValueText" class="text-teal">$5,000</span></label>
+                        <input type="range" id="projectBudgetSlider" class="calc-slider" min="500" max="25000" step="500" value="5000" />
+                    </div>
+
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 24px;">
+                        Traditional platforms take up to 20% from freelancers plus 5% service fees from clients. Felicek charges a flat 1–2% transaction fee to maintain the escrow infrastructure.
+                    </p>
+                </div>
+
+                <div>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Take Rate</th>
+                                <th>You Keep</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Traditional Platforms</td>
+                                <td>20%</td>
+                                <td id="tradTakeText" style="color: #e11d48; font-weight: 600;">$4,000</td>
+                            </tr>
+                            <tr style="background: var(--brand-teal-light); font-weight: 700;">
+                                <td>Felicek (Flat 1%)</td>
+                                <td>1%</td>
+                                <td id="felicekTakeText" class="text-teal">$4,950</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ ACCORDION SECTION -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about identity verification, escrow, and platform security.</p>
+            </div>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Why is there a $20 refundable Trust Vault deposit?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        The $20 Trust Vault deposit acts as an anti-bot hurdle. It prevents automated spammers from mass-applying to thousands of jobs or posting fake job listings. The deposit remains 100% your money and is refundable upon request or after completing your first verified milestone.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How does Escrow Protection work for clients?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        When a client hires a freelancer, project funds are deposited directly into a secure Smart Escrow vault. Funds are only released to the freelancer once the client reviews and approves the submitted milestone work.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What are Live Skill Challenges?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Instead of reading generic cover letters, clients set a brief 5-minute practical task (e.g., "Review this code snippet" or "Draft a headline"). Freelancers submit real proof of competency, eliminating low-effort AI copy-pasted proposals.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGISTRATION MODAL -->
+    <div class="modal-overlay" id="registrationModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeModalBtn">&times;</button>
+            
+            <div id="modalStep1">
+                <h3 style="font-size: 22px; margin-bottom: 8px;">Request Early Access</h3>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
+                    Reserve your spot in the Phase 1 Private Beta and lock in lifetime 1% fee tiers.
+                </p>
+
+                <form id="betaAccessForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" required id="formName" placeholder="e.g. Sadia Rahman" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control" required id="formEmail" placeholder="sadia@example.com" />
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Account Role</label>
+                        <select class="form-control" id="formRole">
+                            <option value="freelancer">Freelancer / Developer / Designer</option>
+                            <option value="client">Client / Employer / Startup</option>
+                            <option value="agency">Agency Founder</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-teal btn-block" style="width: 100%; margin-top: 10px;">
+                        Complete Registration
+                    </button>
+                </form>
+            </div>
+
+            <div id="modalStep2" style="display: none; text-align: center;">
+                <i class="fas fa-check-circle text-teal" style="font-size: 48px; margin-bottom: 16px;"></i>
+                <h3>You're on the list!</h3>
+                <p style="font-size: 14px; color: var(--text-secondary); margin: 12px 0 24px;">
+                    Your invitation code and onboarding schedule have been reserved for <strong id="confirmedEmailText">your email</strong>.
+                </p>
+                <button class="btn btn-navy btn-block" id="finishModalBtn" style="width: 100%;">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="footer-logo">Felicek<span style="color: var(--brand-teal);">.</span></a>
+                    <p style="font-size: 13px; line-height: 1.6; max-width: 300px; margin-bottom: 20px;">
+                        Rebuilding online hiring from the ground up with identity verification, transparent escrow, and sustainable 1–2% flat fees.
+                    </p>
+                    <div class="status-pill">
+                        <i class="fas fa-circle" style="font-size: 8px;"></i> All Systems Operational (v2.1)
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#demo">In-Browser App Demo</a></li>
+                        <li><a href="#calculator">Fee Calculator</a></li>
+                        <li><a href="#">Security Protocol</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Solutions</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">For Startups</a></li>
+                        <li><a href="#">For Freelancers</a></li>
+                        <li><a href="#">Agencies & Teams</a></li>
+                        <li><a href="#">Trust Vault System</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Legal & Trust</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Escrow Guarantee</a></li>
+                        <li><a href="#">KYC Verification</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 Felicek Inc. All rights reserved.</div>
+                <div style="display: flex; gap: 16px; font-size: 16px;">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        (function() {
+            'use strict';
+
+            /* ==========================================================================
+               1. STATE MANAGEMENT
+               ========================================================================== */
+            let state = {
+                theme: 'light',
+                betaSlotsClaimed: parseInt(localStorage.getItem('felicek_slots_claimed')) || 170,
+                activeGuideTab: 'client',
+                simRole: 'freelancer', // 'freelancer' or 'client'
+                simAppTab: 'jobs', // 'jobs', 'proposals', 'vault', 'profile'
+                selectedJobId: null,
+                jobs: [
+                    {
+                        id: 1,
+                        title: 'Mobile App Wireframes & Figma UI Kit',
+                        client: 'Aura Fintech (Verified)',
+                        budget: '$2,400',
+                        escrowStatus: '100% Funded',
+                        trustScore: '99% Match',
+                        challengePrompt: 'Design a single iOS bottom sheet modal for card security settings in Figma.',
+                        skills: ['Figma', 'iOS Design', 'Mobile UI']
+                    },
+                    {
+                        id: 2,
+                        title: 'Kotlin Multiplatform Mobile Core Engine',
+                        client: 'Logix Supply Chains',
+                        budget: '$5,500',
+                        escrowStatus: '100% Funded',
+                        trustScore: '96% Match',
+                        challengePrompt: 'Review our state-machine interface file and output an optimized data class.',
+                        skills: ['Kotlin', 'KMP', 'Android']
+                    }
+                ]
+            };
+
+            /* ==========================================================================
+               2. DOM ELEMENTS
+               ========================================================================== */
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const betaProgressFill = document.getElementById('betaProgressFill');
+            const slotCounterText = document.getElementById('slotCounterText');
+            const slotPercentageText = document.getElementById('slotPercentageText');
+            
+            const tabClientBtn = document.getElementById('tabClientBtn');
+            const tabFreelancerBtn = document.getElementById('tabFreelancerBtn');
+            const stepsGridContainer = document.getElementById('stepsGridContainer');
+
+            const simRoleFreelancer = document.getElementById('simRoleFreelancer');
+            const simRoleClient = document.getElementById('simRoleClient');
+            const simRoleBadge = document.getElementById('simRoleBadge');
+            const appBodyContent = document.getElementById('appBodyContent');
+
+            const projectBudgetSlider = document.getElementById('projectBudgetSlider');
+            const budgetValueText = document.getElementById('budgetValueText');
+            const tradTakeText = document.getElementById('tradTakeText');
+            const felicekTakeText = document.getElementById('felicekTakeText');
+
+            const registrationModal = document.getElementById('registrationModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const headerAccessBtn = document.getElementById('headerAccessBtn');
+            const heroRegisterBtn = document.getElementById('heroRegisterBtn');
+            const demoClaimAccessBtn = document.getElementById('demoClaimAccessBtn');
+            const betaAccessForm = document.getElementById('betaAccessForm');
+            const modalStep1 = document.getElementById('modalStep1');
+            const modalStep2 = document.getElementById('modalStep2');
+            const confirmedEmailText = document.getElementById('confirmedEmailText');
+            const finishModalBtn = document.getElementById('finishModalBtn');
+
+            /* ==========================================================================
+               3. BETA PROGRESS TRACKER UPDATE
+               ========================================================================== */
+            function updateBetaTracker() {
+                slotCounterText.textContent = state.betaSlotsClaimed;
+                const pct = Math.min(Math.round((state.betaSlotsClaimed / 500) * 100), 100);
+                betaProgressFill.style.width = pct + '%';
+                slotPercentageText.textContent = pct + '%';
+            }
+
+            /* ==========================================================================
+               4. WALKTHROUGH TAB SYSTEM
+               ========================================================================== */
+            const clientStepsData = [
+                { num: 1, title: 'Post Verified Jobs', desc: 'Define your scope and fund the escrow account upfront to guarantee payment to talent.' },
+                { num: 2, title: 'Set 5-Min Skill Challenges', desc: 'Skip long generic cover letters. Evaluate short, actionable task responses from candidates.' },
+                { num: 3, title: 'Approve & Release', desc: 'Review completed work milestones and release funds instantly with zero hidden markups.' }
+            ];
+
+            const freelancerStepsData = [
+                { num: 1, title: 'Verify Identity & Vault', desc: 'Complete quick NID/Passport verification to join the spam-free pool of specialists.' },
+                { num: 2, title: 'Complete Skill Challenges', desc: 'Show off your actual craft directly instead of spending money buying proposal connects.' },
+                { num: 3, title: 'Keep 98–99% Earnings', desc: 'Withdraw earnings with industry-lowest 1–2% flat transaction fees.' }
+            ];
+
+            function renderWalkthroughSteps() {
+                const data = state.activeGuideTab === 'client' ? clientStepsData : freelancerStepsData;
+                stepsGridContainer.innerHTML = data.map(s => `
+                    <div class="step-card">
+                        <div class="num">${s.num}</div>
+                        <h3>${s.title}</h3>
+                        <p>${s.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            tabClientBtn.addEventListener('click', () => {
+                state.activeGuideTab = 'client';
+                tabClientBtn.classList.add('active');
+                tabFreelancerBtn.classList.remove('active');
+                renderWalkthroughSteps();
+            });
+
+            tabFreelancerBtn.addEventListener('click', () => {
+                state.activeGuideTab = 'freelancer';
+                tabFreelancerBtn.classList.add('active');
+                tabClientBtn.classList.remove('active');
+                renderWalkthroughSteps();
+            });
+
+            /* ==========================================================================
+               5. SPA APP SIMULATOR ENGINE
+               ========================================================================== */
+            function renderSimulator() {
+                simRoleBadge.textContent = state.simRole === 'freelancer' ? 'Freelancer View' : 'Client View';
+                
+                if (state.selectedJobId !== null) {
+                    const job = state.jobs.find(j => j.id === state.selectedJobId);
+                    appBodyContent.innerHTML = `
+                        <div>
+                            <button class="btn btn-outline btn-sm" id="simBackBtn" style="margin-bottom: 12px;">
+                                <i class="fas fa-arrow-left"></i> Back to Jobs
+                            </button>
+                            <h4 style="font-size: 16px; margin-bottom: 4px;">${job.title}</h4>
+                            <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">${job.client}</div>
+                            
+                            <div style="background: var(--surface-card); padding: 12px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-bottom: 12px;">
+                                <div style="font-size: 12px; font-weight: 700;">Milestone Escrow: <span class="text-teal">${job.budget}</span></div>
+                                <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">Status: ${job.escrowStatus}</div>
+                            </div>
+
+                            <div style="background: var(--brand-teal-light); padding: 12px; border-radius: 8px; font-size: 12px; margin-bottom: 16px;">
+                                <strong>Skill Challenge Prompt:</strong>
+                                <p style="margin-top: 4px; color: var(--text-secondary);">${job.challengePrompt}</p>
+                            </div>
+
+                            <button class="btn btn-teal btn-sm" style="width: 100%;" onclick="alert('Demo Action: Challenge submission modal triggered!')">
+                                <i class="fas fa-paper-plane"></i> Submit Challenge Response
+                            </button>
+                        </div>
+                    `;
+                    document.getElementById('simBackBtn').addEventListener('click', () => {
+                        state.selectedJobId = null;
+                        renderSimulator();
+                    });
+                    return;
+                }
+
+                if (state.simAppTab === 'jobs') {
+                    appBodyContent.innerHTML = `
+                        <div style="font-size: 13px; font-weight: 700; margin-bottom: 10px;">Available Verified Jobs</div>
+                        ${state.jobs.map(j => `
+                            <div class="job-item-card" data-id="${j.id}">
+                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
+                                    <span class="text-teal" style="font-weight:700;">${j.budget}</span>
+                                    <span style="color:var(--text-muted);">${j.trustScore}</span>
+                                </div>
+                                <div style="font-size:13px; font-weight:600; margin-bottom:6px;">${j.title}</div>
+                                <div style="display:flex; gap:4px;">
+                                    ${j.skills.map(sk => `<span style="font-size:9px; background:var(--surface-subtle); padding:2px 6px; border-radius:4px;">${sk}</span>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    `;
+
+                    document.querySelectorAll('.job-item-card').forEach(card => {
+                        card.addEventListener('click', function() {
+                            state.selectedJobId = parseInt(this.dataset.id);
+                            renderSimulator();
+                        });
+                    });
+                } else if (state.simAppTab === 'vault') {
+                    appBodyContent.innerHTML = `
+                        <div style="text-align:center; padding: 20px 10px;">
+                            <i class="fas fa-vault text-teal" style="font-size: 36px; margin-bottom: 12px;"></i>
+                            <h4 style="font-size: 15px;">Refundable Trust Vault</h4>
+                            <div style="font-size: 24px; font-weight: 700; margin: 8px 0;" class="text-teal">$20.00 USD</div>
+                            <p style="font-size: 11px; color: var(--text-secondary);">
+                                Deposit active. Your identity verification status is confirmed. This deposit guarantees zero spam posting.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    appBodyContent.innerHTML = `
+                        <div style="text-align:center; padding:30px 10px; color:var(--text-muted); font-size:12px;">
+                            <i class="fas fa-info-circle" style="font-size:24px; margin-bottom:8px;"></i>
+                            <br />Select "Jobs" or "Vault" to test live features.
+                        </div>
+                    `;
+                }
+            }
+
+            simRoleFreelancer.addEventListener('click', () => {
+                state.simRole = 'freelancer';
+                simRoleFreelancer.className = 'btn btn-sm btn-teal';
+                simRoleClient.className = 'btn btn-sm btn-outline';
+                renderSimulator();
+            });
+
+            simRoleClient.addEventListener('click', () => {
+                state.simRole = 'client';
+                simRoleClient.className = 'btn btn-sm btn-teal';
+                simRoleFreelancer.className = 'btn btn-sm btn-outline';
+                renderSimulator();
+            });
+
+            document.querySelectorAll('.app-nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.app-nav-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    state.simAppTab = this.dataset.apptab;
+                    state.selectedJobId = null;
+                    renderSimulator();
+                });
+            });
+
+            /* ==========================================================================
+               6. FEE SAVINGS CALCULATOR
+               ========================================================================== */
+            function updateCalculator() {
+                const val = parseInt(projectBudgetSlider.value);
+                budgetValueText.textContent = '$' + val.toLocaleString();
+                
+                const traditionalAmt = Math.round(val * 0.80);
+                const felicekAmt = Math.round(val * 0.99);
+
+                tradTakeText.textContent = '$' + traditionalAmt.toLocaleString();
+                felicekTakeText.textContent = '$' + felicekAmt.toLocaleString();
+            }
+
+            projectBudgetSlider.addEventListener('input', updateCalculator);
+
+            /* ==========================================================================
+               7. FAQ ACCORDIONS
+               ========================================================================== */
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    item.classList.toggle('open');
+                });
+            });
+
+            /* ==========================================================================
+               8. MODAL & FORM LOGIC
+               ========================================================================== */
+            function openModal() { registrationModal.classList.add('active'); }
+            function closeModal() { registrationModal.classList.remove('active'); }
+
+            headerAccessBtn.addEventListener('click', openModal);
+            heroRegisterBtn.addEventListener('click', openModal);
+            demoClaimAccessBtn.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+
+            betaAccessForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('formEmail').value;
+                confirmedEmailText.textContent = email;
+
+                state.betaSlotsClaimed += 1;
+                localStorage.setItem('felicek_slots_claimed', state.betaSlotsClaimed);
+                updateBetaTracker();
+
+                modalStep1.style.display = 'none';
+                modalStep2.style.display = 'block';
+            });
+
+            finishModalBtn.addEventListener('click', function() {
+                closeModal();
+                modalStep1.style.display = 'block';
+                modalStep2.style.display = 'none';
+                betaAccessForm.reset();
+            });
+
+            /* ==========================================================================
+               9. THEME TOGGLE
+               ========================================================================== */
+            themeToggleBtn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                themeToggleBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            });
+
+            /* ==========================================================================
+               10. INITIALIZATION
+               ========================================================================== */
+            updateBetaTracker();
+            renderWalkthroughSteps();
+            renderSimulator();
+            updateCalculator();
+
+        })();
+    </script>
+</body>
+</html>

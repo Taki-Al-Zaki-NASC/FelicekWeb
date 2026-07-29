@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What We Offer — Felicek</title>
+
+    <!-- Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --bg-light: #fbf9f5;
+            --bg-card: #f3efe6;
+            --bg-card-inner: #ffffff;
+            --bg-dark-footer: #0b111e;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --text-footer: #9ca3af;
+            --brand-teal: #0d9488;
+            --brand-teal-bright: #00897b;
+            --accent-green: #10b981;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --border-strong: rgba(0, 0, 0, 0.16);
+            --border-teal: rgba(13, 148, 136, 0.3);
+            --font-serif: 'Newsreader', serif;
+            --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+            --max-width: 1140px;
+            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.dark-mode {
+            --bg-light: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-inner: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-strong: rgba(255, 255, 255, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-light); color: var(--text-main); font-family: var(--font-sans); line-height: 1.6; }
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+            border: 1px solid transparent; cursor: pointer; transition: var(--transition-smooth);
+        }
+        .btn-sm { padding: 8px 16px; font-size: 13px; border-radius: 6px; }
+        .btn-teal { background: var(--brand-teal); color: #ffffff; }
+        .btn-teal:hover { background: var(--brand-teal-bright); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-strong); color: var(--text-main); }
+
+        /* Header */
+        header.site-header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--bg-light); border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: var(--font-serif); font-size: 34px; font-weight: 700; display: flex; align-items: center; }
+        .logo .dot { width: 8px; height: 8px; background-color: var(--brand-teal); border-radius: 50%; display: inline-block; margin-left: 2px; }
+        .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand-teal); }
+
+        /* Banner */
+        .page-banner { padding: 60px 0 40px 0; text-align: center; border-bottom: 1px solid var(--border-light); }
+        .page-title { font-family: var(--font-serif); font-size: 48px; line-height: 1.1; margin: 16px 0; }
+        .page-subtitle { font-size: 18px; color: var(--text-muted); max-width: 680px; margin: 0 auto; }
+
+        /* Offer Cards */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 60px 0; }
+        .offer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 36px;
+        }
+        .offer-card h3 { font-family: var(--font-serif); font-size: 28px; margin-bottom: 16px; }
+        .offer-list { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+        .offer-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-muted); }
+        .offer-list i { color: var(--brand-teal); margin-top: 4px; }
+
+        /* Comparison Table */
+        .table-section { margin: 60px 0 100px 0; }
+        .comp-table {
+            width: 100%; border-collapse: collapse; margin-top: 24px;
+            background: var(--bg-card); border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border-strong);
+        }
+        .comp-table th, .comp-table td { padding: 18px 24px; text-align: left; border-bottom: 1px solid var(--border-light); font-size: 14px; }
+        .comp-table th { background: rgba(13, 148, 136, 0.1); font-weight: 700; color: var(--text-main); }
+        .highlight-col { background: rgba(13, 148, 136, 0.05); font-weight: 600; }
+
+        /* Footer */
+        footer.site-footer { background-color: var(--bg-dark-footer); color: #ffffff; padding: 60px 0 40px 0; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: #ffffff; }
+        .footer-logo .dot { width: 6px; height: 6px; background: var(--brand-teal); display: inline-block; border-radius: 50%; }
+
+        @media (max-width: 900px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Felicek<span class="dot"></span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="offer.html" class="active">What We Offer</a></li>
+                <li><a href="demo.html">App Demo</a></li>
+                <li><a href="calculator.html">Savings</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline btn-sm" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+                <a href="index.html" class="btn btn-teal btn-sm"><i class="fas fa-shield-alt"></i> Reserve Beta Seat</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <div class="container">
+            <h1 class="page-title">What We Offer</h1>
+            <p class="page-subtitle">A high-trust execution environment for world-class builders and modern agencies.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Dual Offer Grid -->
+        <div class="grid-2">
+            <div class="offer-card">
+                <h3><i class="fas fa-code text-teal" style="margin-right: 8px;"></i> For Top Engineering & Design Talent</h3>
+                <p style="color: var(--text-muted); font-size: 15px;">Keep 98–99% of what you earn without bid-burning platforms taking a fifth of your work.</p>
+                <ul class="offer-list">
+                    <li><i class="fas fa-check-circle"></i> <strong>1–2% Platform Fee:</strong> Stop paying 20% platform tax on every client milestone.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>No Bot Competitors:</strong> Verified KYC ecosystem guarantees your proposals reach actual clients.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Direct Milestone Escrow:</strong> 100% upfront funding before work begins.</li>
+                </ul>
+            </div>
+
+            <div class="offer-card">
+                <h3><i class="fas fa-building text-teal" style="margin-right: 8px;"></i> For Startups & Scale-Up Clients</h3>
+                <p style="color: var(--text-muted); font-size: 15px;">Hire vetted, real-identity experts without reading 100+ generic AI-generated proposals.</p>
+                <ul class="offer-list">
+                    <li><i class="fas fa-check-circle"></i> <strong>Real Identity Professionals:</strong> Zero fake accounts or unverified offshore intermediaries.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Proof of Skill Verification:</strong> Code challenge and portfolio validation prior to hiring.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Transparent Financial Control:</strong> Complete escrow visibility and 1-click milestone approval.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="table-section">
+            <h2 style="font-family: var(--font-serif); font-size: 32px; text-align: center; margin-bottom: 8px;">Marketplace Comparison</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 15px;">See how Felicek measures up against traditional platforms.</p>
+
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th>Platform Feature</th>
+                        <th class="highlight-col">Felicek</th>
+                        <th>Legacy Marketplaces (Upwork/Fiverr)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Freelancer Platform Commission</strong></td>
+                        <td class="highlight-col" style="color: var(--brand-teal);">1–2% Flat</td>
+                        <td>10% – 20% + Connects Fees</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Identity Verification</strong></td>
+                        <td class="highlight-col"><i class="fas fa-check text-teal"></i> Mandatory Government KYC</td>
+                        <td>Optional / Reactive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI Proposal Spam Mitigation</strong></td>
+                        <td class="highlight-col"><i class="fas fa-shield-halved text-teal"></i> Biometric Filtering</td>
+                        <td><i class="fas fa-times" style="color: #ef4444;"></i> Unfiltered Inbox Spam</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Escrow Vault Settlement</strong></td>
+                        <td class="highlight-col">Automated & Instant</td>
+                        <td>5 to 10 Days Holding Period</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">Felicek<span class="dot"></span></div>
+                    <p style="font-size: 13px; color: var(--text-footer); margin-top: 8px;">Identity verified marketplace with 1–2% flat escrow rates.</p>
+                </div>
+                <div>
+                    <h5>Platform</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="offer.html">What We Offer</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="calculator.html">Savings Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Company</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Legal</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>

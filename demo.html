@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Demo — Felicek</title>
+
+    <!-- Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --bg-light: #fbf9f5;
+            --bg-card: #f3efe6;
+            --bg-card-inner: #ffffff;
+            --bg-dark-footer: #0b111e;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --text-footer: #9ca3af;
+            --brand-teal: #0d9488;
+            --brand-teal-bright: #00897b;
+            --accent-green: #10b981;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --border-strong: rgba(0, 0, 0, 0.16);
+            --border-teal: rgba(13, 148, 136, 0.3);
+            --font-serif: 'Newsreader', serif;
+            --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+            --max-width: 1140px;
+            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.dark-mode {
+            --bg-light: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-inner: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-strong: rgba(255, 255, 255, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-light); color: var(--text-main); font-family: var(--font-sans); line-height: 1.6; }
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+            border: 1px solid transparent; cursor: pointer; transition: var(--transition-smooth);
+        }
+        .btn-sm { padding: 8px 16px; font-size: 13px; border-radius: 6px; }
+        .btn-teal { background: var(--brand-teal); color: #ffffff; }
+        .btn-teal:hover { background: var(--brand-teal-bright); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-strong); color: var(--text-main); }
+
+        /* Header */
+        header.site-header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--bg-light); border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: var(--font-serif); font-size: 34px; font-weight: 700; display: flex; align-items: center; }
+        .logo .dot { width: 8px; height: 8px; background-color: var(--brand-teal); border-radius: 50%; display: inline-block; margin-left: 2px; }
+        .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand-teal); }
+
+        /* Banner */
+        .page-banner { padding: 60px 0 30px 0; text-align: center; }
+        .page-title { font-family: var(--font-serif); font-size: 48px; line-height: 1.1; margin: 16px 0; }
+        .page-subtitle { font-size: 18px; color: var(--text-muted); max-width: 680px; margin: 0 auto; }
+
+        /* Demo Interface Box */
+        .demo-container { margin: 40px auto 100px auto; max-width: 960px; }
+        .demo-tabs { display: flex; justify-content: center; gap: 12px; margin-bottom: 32px; }
+        .tab-btn {
+            padding: 10px 24px; border-radius: 30px; font-weight: 600; font-size: 14px;
+            background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-muted);
+            cursor: pointer; transition: var(--transition-smooth);
+        }
+        .tab-btn.active { background: var(--brand-teal); color: #ffffff; border-color: var(--brand-teal); }
+
+        .demo-screen {
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 32px;
+            min-height: 420px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            display: none;
+        }
+        .demo-screen.active { display: block; }
+
+        /* Inner Screen Mock Components */
+        .mock-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 16px; margin-bottom: 24px; }
+        .mock-badge { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .mock-row { background: var(--bg-card-inner); border: 1px solid var(--border-light); border-radius: 12px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+
+        /* Footer */
+        footer.site-footer { background-color: var(--bg-dark-footer); color: #ffffff; padding: 60px 0 40px 0; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: #ffffff; }
+        .footer-logo .dot { width: 6px; height: 6px; background: var(--brand-teal); display: inline-block; border-radius: 50%; }
+
+        @media (max-width: 900px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+            .demo-tabs { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Felicek<span class="dot"></span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="offer.html">What We Offer</a></li>
+                <li><a href="demo.html" class="active">App Demo</a></li>
+                <li><a href="calculator.html">Savings</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline btn-sm" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+                <a href="index.html" class="btn btn-teal btn-sm"><i class="fas fa-shield-alt"></i> Reserve Beta Seat</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <div class="container">
+            <h1 class="page-title">Interactive Platform Preview</h1>
+            <p class="page-subtitle">Experience how seamless escrow management, identity verification, and contracts work on Felicek.</p>
+        </div>
+    </section>
+
+    <div class="container demo-container">
+        <!-- Tab Selectors -->
+        <div class="demo-tabs">
+            <button class="tab-btn active" onclick="switchDemo('escrow', this)"><i class="fas fa-vault"></i> Escrow Vault</button>
+            <button class="tab-btn" onclick="switchDemo('kyc', this)"><i class="fas fa-id-card"></i> Biometric KYC</button>
+            <button class="tab-btn" onclick="switchDemo('chat', this)"><i class="fas fa-comments"></i> Direct Workspace</button>
+        </div>
+
+        <!-- Screen 1: Escrow Vault -->
+        <div class="demo-screen active" id="screen-escrow">
+            <div class="mock-header">
+                <div>
+                    <h3 style="font-family: var(--font-serif); font-size: 22px;">Contract #FL-8802 — Mobile Banking UI</h3>
+                    <p style="font-size: 13px; color: var(--text-muted);">Client: Nexus Studio | Freelancer: Taki A.</p>
+                </div>
+                <span class="mock-badge"><i class="fas fa-lock"></i> $4,500.00 In Escrow</span>
+            </div>
+
+            <div class="mock-row">
+                <div>
+                    <strong style="font-size: 14px; display: block;">Milestone 1: Wireframes & High-Fidelity UI</strong>
+                    <span style="font-size: 12px; color: var(--text-muted);">Submitted 2 hours ago • Requires Client Sign-off</span>
+                </div>
+                <button class="btn btn-teal btn-sm"><i class="fas fa-check"></i> Release $2,250</button>
+            </div>
+
+            <div class="mock-row">
+                <div>
+                    <strong style="font-size: 14px; display: block;">Milestone 2: Kotlin & Jetpack Compose Integration</strong>
+                    <span style="font-size: 12px; color: var(--text-muted);">Pending Delivery</span>
+                </div>
+                <span style="font-size: 13px; font-weight: 600; color: var(--text-muted);">$2,250.00 Locked</span>
+            </div>
+        </div>
+
+        <!-- Screen 2: Biometric KYC -->
+        <div class="demo-screen" id="screen-kyc">
+            <div class="mock-header">
+                <div>
+                    <h3 style="font-family: var(--font-serif); font-size: 22px;">Verified Developer Badge</h3>
+                    <p style="font-size: 13px; color: var(--text-muted);">Liveness & Passport Verification Engine</p>
+                </div>
+                <span class="mock-badge" style="background: rgba(13, 148, 136, 0.15); color: var(--brand-teal);"><i class="fas fa-user-check"></i> Identity Level 3 Verified</span>
+            </div>
+
+            <div style="text-align: center; padding: 40px 0;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(13, 148, 136, 0.1); color: var(--brand-teal); display: inline-flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 16px;">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h4 style="font-family: var(--font-serif); font-size: 20px;">Identity Authenticated</h4>
+                <p style="font-size: 14px; color: var(--text-muted); max-width: 420px; margin: 8px auto 0 auto;">Government ID verified via Stripe Identity framework. Anti-bot liveness check completed.</p>
+            </div>
+        </div>
+
+        <!-- Screen 3: Chat Workspace -->
+        <div class="demo-screen" id="screen-chat">
+            <div class="mock-header">
+                <div>
+                    <h3 style="font-family: var(--font-serif); font-size: 22px;">Encrypted Communication Hub</h3>
+                    <p style="font-size: 13px; color: var(--text-muted);">Project: Android Jetpack Compose Refactor</p>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto;">
+                <div style="align-self: flex-start; background: var(--bg-card-inner); padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border-light); font-size: 14px;">
+                    <strong>Client:</strong> Milestone 1 funds are locked in Escrow. You can start the design handoff!
+                </div>
+                <div style="align-self: flex-end; background: var(--brand-teal); color: #ffffff; padding: 12px 16px; border-radius: 12px; font-size: 14px;">
+                    <strong>You:</strong> Perfect! Pushing the initial Figma components and GitHub commit link now.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">Felicek<span class="dot"></span></div>
+                    <p style="font-size: 13px; color: var(--text-footer); margin-top: 8px;">Identity verified marketplace with 1–2% flat escrow rates.</p>
+                </div>
+                <div>
+                    <h5>Platform</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="offer.html">What We Offer</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="calculator.html">Savings Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Company</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Legal</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        function switchDemo(screenId, btn) {
+            document.querySelectorAll('.demo-screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('screen-' + screenId).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

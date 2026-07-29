@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Felicek — Identity Verified Marketplace</title>
+
+    <!-- Typography & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<!-- 🚀 সঠিক SVG Favicon লিঙ্ক -->
+<link rel="icon" type="image/svg+xml" href="Felicek.svg?v=1" />
+    <style>
+        /* ==========================================================================
+           THEME SYSTEM & DESIGN VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-light: #fbf9f5;
+            --bg-card: #f3efe6;
+            --bg-card-inner: #ffffff;
+            --bg-dark-footer: #0b111e;
+            
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --text-footer: #9ca3af;
+            
+            --brand-teal: #0d9488;
+            --brand-teal-bright: #00897b;
+            --accent-green: #10b981;
+            --accent-amber: #d97706;
+            
+            --border-light: rgba(0, 0, 0, 0.08);
+            --border-strong: rgba(0, 0, 0, 0.16);
+            --border-teal: rgba(13, 148, 136, 0.3);
+            
+            --font-serif: 'Newsreader', serif;
+            --font-sans: 'IBM Plex Sans', -apple-system, sans-serif;
+            --max-width: 1140px;
+            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.dark-mode {
+            --bg-light: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-inner: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-strong: rgba(255, 255, 255, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3, .serif-heading {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .text-teal { color: var(--brand-teal-bright) !important; }
+
+        /* Buttons & Badges */
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: rgba(13, 148, 136, 0.1);
+            border: 1px solid var(--border-teal);
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--brand-teal);
+            text-transform: uppercase;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .btn-sm { padding: 8px 16px; font-size: 13px; border-radius: 6px; }
+        .btn-teal { background: var(--brand-teal); color: #ffffff; }
+        .btn-teal:hover { background: var(--brand-teal-bright); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-strong); color: var(--text-main); }
+        .btn-navy { background: #1e293b; color: #ffffff; }
+
+        /* Header */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 0;
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: var(--font-serif); font-size: 34px; font-weight: 700; display: flex; align-items: center; }
+        .logo .dot { width: 8px; height: 8px; background-color: var(--brand-teal); border-radius: 50%; display: inline-block; margin-left: 2px; }
+        .nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 600; color: var(--text-muted); }
+
+        /* Hero */
+        .hero { padding: 60px 0; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
+        .hero-title { font-size: 56px; line-height: 1.05; margin: 20px 0; }
+        .hero-subtitle { font-size: 17px; color: var(--text-muted); margin-bottom: 32px; }
+
+        /* Categorized Beta Access Cards */
+        .beta-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 28px;
+        }
+        .seat-row {
+            margin-top: 16px;
+            padding: 12px;
+            background: var(--bg-card-inner);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+        .progress-bar-container { height: 8px; background: rgba(0,0,0,0.08); border-radius: 99px; overflow: hidden; margin: 8px 0; }
+        .progress-bar-fill { height: 100%; background: var(--brand-teal); transition: width 0.4s ease; }
+
+        /* Section Layouts */
+        .section-padding { padding: 80px 0; border-top: 1px solid var(--border-light); }
+        .section-header { text-align: center; max-width: 640px; margin: 0 auto 48px auto; }
+        .section-header h2 { font-size: 42px; margin-bottom: 10px; }
+
+        /* Founder Section */
+        .founder-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-strong);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .founder-img {
+            width: 100%;
+            height: 220px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 2px solid var(--brand-teal);
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            padding: 0 20px 20px 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+            display: none;
+        }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        /* Interactive Simulator */
+        .sim-shell {
+            background: var(--bg-card-inner);
+            border: 1px solid var(--border-strong);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* Offer Grid */
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .offer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        /* Modal Form */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--border-strong);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-close { position: absolute; top: 16px; right: 20px; font-size: 22px; cursor: pointer; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-strong);
+            background: var(--bg-card-inner);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 14px;
+        }
+
+        /* Dark Footer */
+        footer.site-footer {
+            background-color: var(--bg-dark-footer);
+            color: #ffffff;
+            padding: 60px 0 40px 0;
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: #ffffff; margin-bottom: 12px; }
+        .footer-logo .dot { width: 6px; height: 6px; background: var(--brand-teal); display: inline-block; border-radius: 50%; }
+
+        @media (max-width: 900px) {
+            .hero-grid, .founder-card, .offer-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BANNER -->
+    <div style="background: #0b111e; color: #38bdf8; text-align: center; padding: 10px; font-size: 13px;">
+        🚀 Phase 1 Private Beta Access is live. <strong style="color: #fff;">2,000 Total Spots Allocated across 4 categories.</strong>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo">Felicek<span class="dot"></span></a>
+            
+            <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="offer.html">What We Offer</a></li>
+            <li><a href="#demo">App Demo</a></li>
+            <li><a href="calculator.html">Savings</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+        </ul>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-outline btn-sm" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+                <button class="btn btn-teal btn-sm trigger-beta-modal"><i class="fas fa-shield-alt"></i> Request Access</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="badge-pill"><i class="fas fa-check-circle"></i> Identity Verified Marketplace</span>
+                <h1 class="hero-title">Verified talent.<br /><span class="text-teal">Zero spam.</span> Fair 1–2% fees.</h1>
+                <p class="hero-subtitle">
+                    Felicek replaces traditional 20% platform commissions with KYC verification, direct skill testing, and instant escrow settlement.
+                </p>
+
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn btn-teal trigger-beta-modal"><i class="fas fa-user-check"></i> Join Private Beta</button>
+                    <a href="#demo" class="btn btn-navy"><i class="fas fa-mobile-alt"></i> Test Live App Demo</a>
+                </div>
+            </div>
+
+            <!-- CATEGORIZED SEAT COUNTERS (500 SEATS EACH) -->
+            <div class="beta-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="font-size: 20px;">Reserved Beta Access</h3>
+                    <span class="badge-pill"><i class="fas fa-bolt"></i> Live Allocation</span>
+                </div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Each category is strictly capped at 500 verified early-access members.</p>
+
+                <!-- Freelancers Counter -->
+                <div class="seat-row">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                        <span><i class="fas fa-user-code text-teal"></i> Freelancers</span>
+                        <span><strong id="freelancerCount">170</strong> / 500 Seats (<span id="freelancerPct">34</span>%)</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="freelancerFill" style="width: 34%;"></div>
+                    </div>
+                </div>
+
+                <!-- Clients Counter -->
+                <div class="seat-row">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                        <span><i class="fas fa-user-tie text-teal"></i> Individual Clients</span>
+                        <span><strong id="clientCount">125</strong> / 500 Seats (<span id="clientPct">25</span>%)</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="clientFill" style="width: 25%;"></div>
+                    </div>
+                </div>
+
+                <!-- Startups Counter -->
+                <div class="seat-row">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                        <span><i class="fas fa-rocket text-teal"></i> Startups</span>
+                        <span><strong id="startupCount">88</strong> / 500 Seats (<span id="startupPct">18</span>%)</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="startupFill" style="width: 18%;"></div>
+                    </div>
+                </div>
+
+                <!-- Agencies Counter -->
+                <div class="seat-row">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                        <span><i class="fas fa-building text-teal"></i> Agencies & Teams</span>
+                        <span><strong id="agencyCount">62</strong> / 500 Seats (<span id="agencyPct">12</span>%)</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="agencyFill" style="width: 12%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT WE OFFER SECTION -->
+    <section class="section-padding" id="offer">
+        <div class="container">
+            <div class="section-header">
+                <h2>What We Offer</h2>
+                <p>Designed from the ground up to solve the biggest flaws of modern freelance marketplaces.</p>
+            </div>
+
+            <div class="offer-grid">
+                <div class="offer-card">
+                    <i class="fas fa-id-card text-teal" style="font-size: 32px; margin-bottom: 16px;"></i>
+                    <h3 style="font-size: 22px; margin-bottom: 8px;">KYC Identity Verification</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Every client and freelancer undergoes government ID verification before bidding or hiring. Zero fake accounts, zero automated bot spam.</p>
+                </div>
+                <div class="offer-card">
+                    <i class="fas fa-percentage text-teal" style="font-size: 32px; margin-bottom: 16px;"></i>
+                    <h3 style="font-size: 22px; margin-bottom: 8px;">Flat 1–2% Platform Fee</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Stop giving away 20% to 25% of your earnings. Keep 98% of what you earn with transparent, direct payment processing fees.</p>
+                </div>
+                <div class="offer-card">
+                    <i class="fas fa-vault text-teal" style="font-size: 32px; margin-bottom: 16px;"></i>
+                    <h3 style="font-size: 22px; margin-bottom: 8px;">Milestone Escrow Vault</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Clients fund milestones in advance into a locked escrow vault. Freelancers work with 100% guaranteed payment security.</p>
+                </div>
+                <div class="offer-card">
+                    <i class="fas fa-laptop-code text-teal" style="font-size: 32px; margin-bottom: 16px;"></i>
+                    <h3 style="font-size: 22px; margin-bottom: 8px;">Direct Skill Challenges</h3>
+                    <p style="color: var(--text-muted); font-size: 14px;">Instead of writing long proposals, prove your skills through direct repo submissions, code samples, or micro-tests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR GOAL & MISSION SECTION -->
+    <section class="section-padding" id="goal">
+        <div class="container">
+            <div style="background: var(--bg-card); padding: 48px; border-radius: 24px; border: 1px solid var(--border-strong); text-align: center; max-width: 860px; margin: 0 auto;">
+                <span class="badge-pill" style="margin-bottom: 16px;"><i class="fas fa-bullseye"></i> Our Mission</span>
+                <h2 style="font-size: 38px; margin-bottom: 16px;">Our Goal: A Fairer Economy for Global Talent</h2>
+                <p style="color: var(--text-muted); font-size: 16px; line-height: 1.8;">
+                    Our goal is to dismantle predatory marketplace models that extract massive commissions from high-performing developers, designers, and agencies. By leveraging identity verification, automated contract escrow, and clean UX, Felicek provides a direct bridge where clients get high-caliber work and talent keeps what they rightfully earn.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE APP DEMO (FREELANCER VS CLIENT SWITCHER) -->
+    <section class="section-padding" id="demo">
+        <div class="container">
+            <div class="section-header">
+                <h2>Interactive App Demo</h2>
+                <p>Switch roles to preview the client and freelancer dashboard experiences.</p>
+                
+                <div style="margin-top: 16px; display: inline-flex; gap: 10px;">
+                    <button class="btn btn-sm btn-teal" id="roleFreelancerBtn">Freelancer View</button>
+                    <button class="btn btn-sm btn-outline" id="roleClientBtn">Client View</button>
+                </div>
+            </div>
+
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="sim-shell" id="appDemoContainer">
+                    <!-- Dynamic App Demo Content Injected Here via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER SPOTLIGHT SECTION -->
+    <section class="section-padding" id="founder">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet the Founder</h2>
+                <p>Building a transparent, commission-free hiring ecosystem for global developers and creators.</p>
+            </div>
+
+            <div class="founder-card">
+                <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png" alt="Founder Portrait" class="founder-img" />
+                <div>
+                    <h3 style="font-size: 28px; margin-bottom: 4px;">Taki Al Zaki</h3>
+                    <p class="text-teal" style="font-weight: 600; margin-bottom: 16px;">Founder & Lead Architect</p>
+                    <p style="color: var(--text-muted); margin-bottom: 16px; font-style: italic;">
+                        "Freelancers shouldn't lose a quarter of their hard-earned income to outdated platforms. Felicek was created to offer identity-verified escrow security at direct, flat transaction costs."
+                    </p>
+                    <div style="display: flex; gap: 16px; font-size: 18px; color: var(--text-muted);">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAVINGS CALCULATOR -->
+    <section class="section-padding" id="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2>Fee Savings Calculator</h2>
+                <p>Calculated using 1.5% platform fee plus 4% transaction processing fees.</p>
+            </div>
+
+            <div style="max-width: 600px; margin: 0 auto; background: var(--bg-card); padding: 32px; border-radius: 20px; border: 1px solid var(--border-strong);">
+                <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 12px;">
+                    <span>Project Budget ($ USD):</span>
+                    <span class="text-teal" id="budgetVal">$5,000</span>
+                </div>
+                <input type="range" id="budgetRange" min="10" max="20000" step="10" value="5000" style="width: 100%; margin-bottom: 24px;" />
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--bg-card-inner); padding: 16px; border-radius: 12px; border: 1px solid var(--border-light);">
+                    <div>
+                        <span style="font-size: 12px; color: var(--text-muted);">Traditional Cut (25%)</span>
+                        <strong style="display: block; font-size: 20px; color: #ef4444;" id="tradFee">$1,250</strong>
+                    </div>
+                    <div>
+                        <span style="font-size: 12px; color: var(--text-muted);">Felicek Total Fee (5.5%)</span>
+                        <strong class="text-teal" style="display: block; font-size: 20px;" id="felicekFee">$275</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="section-padding" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about joining our private beta and escrow security.</p>
+            </div>
+
+            <div style="max-width: 760px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question">How does Felicek maintain flat 1–2% fees? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">By utilizing direct KYC verification and streamlined smart escrow contracts, we eliminate unnecessary middleman administrative overheads and pass savings directly to users.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the additional 4% processing charge? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">The 4% fee directly covers third-party credit card gateway charges, banking anti-fraud compliance, and instant cross-border currency payouts.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How are client escrow deposits protected? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Funds remain securely locked in segregated banking escrow accounts and are only released when project milestones are reviewed and approved by the client.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does identity verification (KYC) stop proposal spam? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Because every account is tied to a verified passport or government ID, automated bots and copy-paste proposal spammers cannot operate on Felicek.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         COMMENTED SECTION 1: DOWNLOAD APP PROMOTIONAL BANNER
+         (UNCOMMENT THE HTML BLOCK BELOW WHEN READY TO PUBLISH MOBILE APPS)
+         ========================================================================== -->
+    <!--
+    <section class="section-padding" id="download-app" style="background: var(--bg-card);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <span class="badge-pill"><i class="fas fa-mobile-alt"></i> Native Experience</span>
+                    <h2 class="serif-heading" style="font-size: 40px; margin: 16px 0;">Download Felicek Mobile</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">
+                        Manage ongoing escrow contracts, review real-time code submissions, and receive instant payouts directly from your iOS or Android mobile device.
+                    </p>
+                    <div style="display: flex; gap: 16px;">
+                        <a href="#" class="btn btn-navy" style="padding: 12px 20px;">
+                            <i class="fab fa-apple" style="font-size: 22px;"></i>
+                            <div style="text-align: left; line-height: 1.1;">
+                                <small style="font-size: 10px; display: block;">Download on the</small>
+                                <strong>App Store</strong>
+                            </div>
+                        </a>
+                        <a href="#" class="btn btn-navy" style="padding: 12px 20px;">
+                            <i class="fab fa-google-play" style="font-size: 20px;"></i>
+                            <div style="text-align: left; line-height: 1.1;">
+                                <small style="font-size: 10px; display: block;">GET IT ON</small>
+                                <strong>Google Play</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 260px; height: 380px; background: #0b111e; border-radius: 30px; margin: 0 auto; border: 4px solid var(--border-strong); padding: 20px; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <i class="fas fa-shield-alt text-teal" style="font-size: 48px; margin-bottom: 16px;"></i>
+                        <h4>Felicek Mobile App</h4>
+                        <p style="font-size: 12px; color: #94a3b8; margin-top: 8px;">v2.1 Private Build</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- ==========================================================================
+         COMMENTED SECTION 2: OUR 8 TRUSTED PARTNERS
+         (UNCOMMENT THE HTML BLOCK BELOW WHEN READY TO DISPLAY PARTNER LOGOS)
+         ========================================================================== -->
+    <!--
+    <section class="section-padding" id="partners">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Strategic Partners</h2>
+                <p>Collaborating with industry leaders in global identity verification, decentralized infrastructure, and secure escrow settlement.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fas fa-shield-halved text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">Stripe Identity</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Global KYC Provider</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fas fa-vault text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">Escrow.com API</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Secure Settlement</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fab fa-aws text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">AWS Activate</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Cloud Infrastructure</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fas fa-code-branch text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">GitHub Ventures</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Developer Partner</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fas fa-lock text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">Auth0 Security</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Authentication System</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fas fa-globe text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">Cloudflare Zero Trust</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">DDoS & Edge Shield</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fas fa-coins text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">Plaid Payments</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Direct Bank Settlement</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 24px; border-radius: 12px; text-align: center; border: 1px solid var(--border-light);">
+                    <i class="fas fa-certificate text-teal" style="font-size: 28px; margin-bottom: 10px;"></i>
+                    <h4 style="font-size: 16px;">CertiK Audits</h4>
+                    <span style="font-size: 12px; color: var(--text-muted);">Smart Contract Verified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <!-- EXPANDED PRIVATE BETA MODAL -->
+    <div class="modal-overlay" id="betaModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalCloseBtn">&times;</span>
+            <h3 style="font-size: 24px; margin-bottom: 4px;">Reserve Beta Access</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Provide your account details to lock in 1% lifetime platform fees.</p>
+            
+            <form id="betaForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="userFullName" placeholder="e.g. Alex Mercer" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="userEmail" placeholder="alex@company.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Joining As</label>
+                    <select id="userRole" required>
+                        <option value="freelancer">Freelancer / Individual Developer</option>
+                        <option value="client">Individual Client / Hiring Manager</option>
+                        <option value="startup">Startup Founder</option>
+                        <option value="agency">Agency / Enterprise Team</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Estimated Monthly Revenue / Earnings ($ USD)</label>
+                    <select id="userRevenue" required>
+                        <option value="<1k">Under $1,000 / month</option>
+                        <option value="1k-5k">$1,000 – $5,000 / month</option>
+                        <option value="5k-20k">$5,000 – $20,000 / month</option>
+                        <option value="20k+">$20,000+ / month</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-teal" style="width: 100%; margin-top: 8px;">
+                    <i class="fas fa-paper-plane"></i> Complete Reservation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">Felicek<span class="dot"></span></div>
+                    <p style="font-size: 13px; color: var(--text-footer);">Identity verified marketplace with 1–2% flat escrow rates.</p>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Platform</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="#offer">What We Offer</a></li>
+                        <li><a href="#demo">App Demo</a></li>
+                        <li><a href="#calculator">Fee Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Company</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="#goal">Our Goal</a></li>
+                        <li><a href="#founder">Founder Spotlight</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 style="margin-bottom: 12px;">Legal</h5>
+                    <ul style="font-size: 13px; color: var(--text-footer);">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 24px; font-size: 13px; color: var(--text-footer);">
+                <span>© 2026 Felicek Inc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // 1. Categorized Seats Counter
+        const seatData = {
+            freelancer: { count: 170, max: 500, countEl: 'freelancerCount', fillEl: 'freelancerFill', pctEl: 'freelancerPct' },
+            client:     { count: 125, max: 500, countEl: 'clientCount', fillEl: 'clientFill', pctEl: 'clientPct' },
+            startup:    { count: 88,  max: 500, countEl: 'startupCount', fillEl: 'startupFill', pctEl: 'startupPct' },
+            agency:     { count: 62,  max: 500, countEl: 'agencyCount', fillEl: 'agencyFill', pctEl: 'agencyPct' }
+        };
+
+        function updateCategoryUI(role) {
+            const cat = seatData[role];
+            if (!cat) return;
+            const pct = Math.round((cat.count / cat.max) * 100);
+            document.getElementById(cat.countEl).textContent = cat.count;
+            document.getElementById(cat.pctEl).textContent = pct;
+            document.getElementById(cat.fillEl).style.width = pct + '%';
+        }
+
+        // 2. Modal Controls
+        const betaModal = document.getElementById('betaModal');
+        const triggerBtns = document.querySelectorAll('.trigger-beta-modal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const betaForm = document.getElementById('betaForm');
+
+        triggerBtns.forEach(btn => btn.addEventListener('click', () => betaModal.classList.add('active')));
+        modalCloseBtn.addEventListener('click', () => betaModal.classList.remove('active'));
+
+        betaForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = betaForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+
+    // ১. ব্রাউজারের পপ-আপ বন্ধ করে বাটনের লেখা লাইভ চেঞ্জ করা
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reserving...';
+
+    const formData = {
+        fullName: document.getElementById('userFullName').value.trim(),
+        email: document.getElementById('userEmail').value.trim(),
+        role: document.getElementById('userRole').value,
+        monthlyRevenue: document.getElementById('userRevenue').value,
+        requestedAt: Date.now(), // timestamp
+        status: "pending"
+    };
+
+    try {
+        // Realtime Database-এ সেভ করা
+        const reservationsRef = ref(db, 'beta_reservations');
+        await push(reservationsRef, formData);
+
+        // সফল হলে বাটনে সাকসেস দেখানো (কোনো বিরক্তিকর ব্রাউজার পপ-আপ ছাড়াই)
+        submitBtn.style.background = '#00ff88';
+        submitBtn.style.color = '#000';
+        submitBtn.innerHTML = '✅ Seat Reserved!';
+        betaForm.reset();
+
+        setTimeout(() => {
+            closeAccessModal();
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+            submitBtn.style.color = '';
+            submitBtn.innerHTML = originalBtnText;
+        }, 2000);
+
+    } catch (error) {
+        console.error("Database Write Error:", error);
+        submitBtn.style.background = '#ff4d4d';
+        submitBtn.innerHTML = '❌ Failed! Try Again';
+        
+        setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+            submitBtn.innerHTML = originalBtnText;
+        }, 2500);
+    }
+});
+        // 4. Role-Switching In-Browser App Demo Logic
+        const appDemoContainer = document.getElementById('appDemoContainer');
+        const roleFreelancerBtn = document.getElementById('roleFreelancerBtn');
+        const roleClientBtn = document.getElementById('roleClientBtn');
+
+        function renderAppDemo(role) {
+            if (role === 'freelancer') {
+                appDemoContainer.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
+                        <strong>Freelancer Dashboard Feed</strong>
+                        <span class="badge-pill">1.5% Fee Tier</span>
+                    </div>
+                    <div style="padding:12px; background:var(--bg-card); border-radius:8px; margin-bottom:10px; border: 1px solid var(--border-light);">
+                        <div style="display:flex; justify-content:space-between;"><strong>Android Compose UI</strong> <span class="text-teal">$2,800</span></div>
+                        <small style="color:var(--text-muted);">Client Escrow Verified • 2 Milestones</small>
+                    </div>
+                    <div style="padding:12px; background:var(--bg-card); border-radius:8px; border: 1px solid var(--border-light);">
+                        <div style="display:flex; justify-content:space-between;"><strong>iOS Glassmorphism Kit</strong> <span class="text-teal">$1,950</span></div>
+                        <small style="color:var(--text-muted);">Direct Skill Challenge Active</small>
+                    </div>
+                `;
+            } else {
+                appDemoContainer.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
+                        <strong>Client Management Dashboard</strong>
+                        <span class="badge-pill" style="color:var(--accent-green);">Total Escrow Vault: $4,750</span>
+                    </div>
+                    <div style="padding:12px; background:var(--bg-card); border-radius:8px; margin-bottom:10px; border: 1px solid var(--border-light);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <strong>Active Contract Milestone #1</strong><br/>
+                                <small style="color:var(--text-muted);">Developer: Taki Al Zaki • Reviewing Code</small>
+                            </div>
+                            <button class="btn btn-sm btn-teal">Approve & Release</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-navy" style="width:100%; margin-top:8px;">+ Deposit Funds to Escrow Vault</button>
+                `;
+            }
+        }
+
+        roleFreelancerBtn.addEventListener('click', () => {
+            roleFreelancerBtn.className = 'btn btn-sm btn-teal';
+            roleClientBtn.className = 'btn btn-sm btn-outline';
+            renderAppDemo('freelancer');
+        });
+
+        roleClientBtn.addEventListener('click', () => {
+            roleClientBtn.className = 'btn btn-sm btn-teal';
+            roleFreelancerBtn.className = 'btn btn-sm btn-outline';
+            renderAppDemo('client');
+        });
+
+        renderAppDemo('freelancer');
+
+        // 5. FAQ Accordion Logic
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // 6. Savings Calculator Logic
+        const budgetRange = document.getElementById('budgetRange');
+        const budgetVal = document.getElementById('budgetVal');
+        const tradFee = document.getElementById('tradFee');
+        const felicekFee = document.getElementById('felicekFee');
+
+        budgetRange.addEventListener('input', () => {
+            const val = parseFloat(budgetRange.value);
+            budgetVal.textContent = `$${val.toLocaleString()}`;
+            tradFee.textContent = `$${Math.round(val * 0.25).toLocaleString()}`;
+            felicekFee.textContent = `$${Math.round(val * 0.055).toLocaleString()}`;
+        });
+
+        // 7. Theme Toggle
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+
+    <!-- Firebase & Realtime Database Script -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // আপনার Firebase Config
+    const firebaseConfig = {
+        apiKey: "AIzaSyCpSoLppM7uXS01jsgbClH9KSMd44Mrrkw",
+        authDomain: "felicek-9b728.firebaseapp.com",
+        databaseURL: "https://felicek-9b728-default-rtdb.firebaseio.com",
+        projectId: "felicek-9b728",
+        storageBucket: "felicek-9b728.firebasestorage.app",
+        messagingSenderId: "853519530089",
+        appId: "1:853519530089:web:3dd0ffcf58de21c1168af8",
+        measurementId: "G-B6HXTHQBVV"
+    };
+
+    // Realtime Database Initialize
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // ✅ REAL-TIME SEAT COUNTER - Listens to Firebase beta_reservations
+    function initRealtimeSeatCounter() {
+        const reservationsRef = ref(db, 'beta_reservations');
+        
+        onValue(reservationsRef, (snapshot) => {
+            const data = snapshot.val();
+            
+            // Count submissions by role
+            const counts = {
+                freelancer: 0,
+                client: 0,
+                startup: 0,
+                agency: 0
+            };
+
+            if (data) {
+                Object.values(data).forEach(submission => {
+                    const role = submission.role;
+                    if (counts.hasOwnProperty(role)) {
+                        counts[role]++;
+                    }
+                });
+            }
+
+            // Update all seat counters and progress bars
+            updateSeatDisplay('freelancer', counts.freelancer, 500);
+            updateSeatDisplay('client', counts.client, 500);
+            updateSeatDisplay('startup', counts.startup, 500);
+            updateSeatDisplay('agency', counts.agency, 500);
+        });
+    }
+
+    // Update a single category's display
+    function updateSeatDisplay(role, count, max) {
+        const seatNames = {
+            freelancer: 'freelancer',
+            client: 'client',
+            startup: 'startup',
+            agency: 'agency'
+        };
+        
+        const name = seatNames[role];
+        const pct = Math.round((count / max) * 100);
+
+        // Update count display
+        const countEl = document.getElementById(`${name}Count`);
+        if (countEl) countEl.textContent = count;
+
+        // Update percentage display
+        const pctEl = document.getElementById(`${name}Pct`);
+        if (pctEl) pctEl.textContent = pct;
+
+        // Update progress bar width
+        const fillEl = document.getElementById(`${name}Fill`);
+        if (fillEl) fillEl.style.width = pct + '%';
+    }
+
+    // Modal Control Functions
+    window.openAccessModal = function() {
+        const modal = document.getElementById('betaModal');
+        if (modal) modal.style.display = 'flex';
+    };
+
+    window.closeAccessModal = function() {
+        const modal = document.getElementById('betaModal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Start listening to Firebase changes
+        initRealtimeSeatCounter();
+
+        const betaModal = document.getElementById('betaModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const betaForm = document.getElementById('betaForm');
+
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeAccessModal);
+        }
+
+        if (betaModal) {
+            window.addEventListener('click', (e) => {
+                if (e.target === betaModal) closeAccessModal();
+            });
+        }
+
+        if (betaForm) {
+            const submitBtn = betaForm.querySelector('button[type="submit"]');
+            const statusDiv = document.createElement('div');
+            statusDiv.style.marginTop = '12px';
+            statusDiv.style.fontWeight = '600';
+            statusDiv.style.fontSize = '14px';
+            statusDiv.style.textAlign = 'center';
+            betaForm.appendChild(statusDiv);
+
+            betaForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = {
+                    fullName: document.getElementById('userFullName').value.trim(),
+                    email: document.getElementById('userEmail').value.trim(),
+                    role: document.getElementById('userRole').value,
+                    monthlyRevenue: document.getElementById('userRevenue').value,
+                    requestedAt: new Date().toISOString(),
+                    status: "pending"
+                };
+
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                statusDiv.style.color = 'var(--brand-teal, #00d2ff)';
+                statusDiv.textContent = 'Saving your reservation...';
+
+                try {
+                    // Save to Realtime Database path: "beta_reservations"
+                    const reservationsRef = ref(db, 'beta_reservations');
+                    await push(reservationsRef, formData);
+
+                    statusDiv.style.color = '#00ff88';
+                    statusDiv.textContent = '✅ Seat Reserved! 1% Lifetime Fee locked.';
+                    betaForm.reset();
+
+                    setTimeout(() => {
+                        closeAccessModal();
+                        statusDiv.textContent = '';
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                    }, 2500);
+
+                } catch (error) {
+                    console.error("Realtime Database Error:", error);
+                    statusDiv.style.color = '#ff4d4d';
+                    statusDiv.textContent = '❌ Something went wrong. Try again!';
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
